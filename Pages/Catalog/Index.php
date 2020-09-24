@@ -27,6 +27,7 @@
             <li class="breadcrumbs-item">
                 <a href="/pages/catalog" class="breadcrumbs-link">Главная</a>
             </li>
+            <div class="as">EM KAL</div>
         </nav>
         <h1 class="default">Каталог товаров</h1>
         <form class="default catalog-form" id="catalog">
