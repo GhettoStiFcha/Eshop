@@ -1,0 +1,21 @@
+{
+    "name": "skuleshov/shop",
+    "description": "test-eshop",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Svyatoslav Kuleshov",
+            "email": "slava3626@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Contracts\\": "App/Contracts",
+            "Absract\\": "App/Absract",
+            "Controllers\\": "App/Controllers",
+            "Traits\\": "App/Controllers/Traits",
+            "Database\\": "App/Database"
+        }
+    }
+}
