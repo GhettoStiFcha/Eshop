@@ -8,7 +8,7 @@
         <a href="#contacts" class="header-nav-a">О нас</a>
     </nav>
     <nav class="header-nav">
-        <a href="#login" class="header-nav-a">Войти</a>
+        <a href="/Login/Login.php" class="header-nav-a">Войти</a>
         <a href="#cart" class="header-nav-a">Корзина(0)</a>
     </nav>
     
