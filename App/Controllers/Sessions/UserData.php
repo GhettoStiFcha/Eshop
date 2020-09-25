@@ -7,13 +7,16 @@ use Database\MysqlConnection;
 
 class UserData
 {
+    private $db;
+    private $connection;
+
     public function __construct()
     {
         $this->connection = MysqlConnection::connect();
         session_start();
     }
 
-    public function getUserData(): array
+    public function getUserData(string $login, string $pass): array
     {
         $query = "SELECT * FROM users WHERE login = ? AND password = ?";
 
@@ -21,7 +24,7 @@ class UserData
 
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         
-        $statement->execute();
+        $statement->execute([$login, $pass]);
         
         $result = $statement->fetchAll();
 
