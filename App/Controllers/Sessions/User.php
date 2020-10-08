@@ -9,5 +9,5 @@ use Controllers\Sessions\UserData;
 $user = new UserData();
 
 if (!empty($_POST)) {
-    echo json_encode($user->getUserData($_GET['login'], $_GET['pass']));
+    echo json_encode($user->getUserData($_POST['login'], $_POST['pass']));
 }
