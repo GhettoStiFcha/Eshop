@@ -5,7 +5,7 @@
 
     $categories = new Categories();
     $rootCategories = $categories->getRootCategories();
-    // $childCategories = $categories->getChildCategories();
+    $childCategories = $categories->getChildCategories();
 
     // print_r($childCategories);
 ?>
@@ -36,7 +36,12 @@
                     <option value="<?=$value['id']?>"><?=$value['category_name']?></option>
                 <?php endforeach;?>
             </select>
-            
+            <select name="subcategory">
+                <option hidden>Выберите подкатегорию</option>
+                <?php foreach($childCategories as $key => $value): ?>
+                    <option value="<?=$value['parent_id']?>"><?=$value['category_name']?></option>
+                <?php endforeach;?>
+            </select>
             <select name="price">
                 <option hidden>Выберите стоимость</option>
                 <option value="6000-10000">6000-10000</option>

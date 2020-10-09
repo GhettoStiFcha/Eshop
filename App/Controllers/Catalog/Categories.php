@@ -36,7 +36,7 @@ class Categories
         // 2. Указываем тип данных
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         // 3. Отправляем запрос в БД
-        $statement->execute([$this->rootID]);
+        $statement->execute([$parent]);
         // 4. Указываем что сделать с данными после получения запроса
         $result = $statement->fetchAll();
 

@@ -40,12 +40,7 @@ function getFormData(formName) {
 
 function regenerateSubCategories(subCategories) {
     let item = `
-        <select name="subcategory">
-            <option hidden>Выберите подкатегорию</option>
-            <?php foreach($childCategories as $key => $value): ?>
-                <option value="<?=$value['parent_id']?>"><?=$value['category_name']?></option>
-            <?php endforeach;?>
-        </select>
+        
         `;
 
     return item;

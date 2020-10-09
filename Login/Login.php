@@ -7,20 +7,20 @@
     $userData = new UserData();
     $user = $userData->getUserData();
 
-    if(!empty($_POST)) {
+    // if(!empty($_POST)) {
 
-        echo '<pre>';
-        print_r($_POST);
-        echo '</pre>';
-        // md5
-        // sha256
+    //     // echo '<pre>';
+    //     // print_r($_POST);
+    //     // echo '</pre>';
+    //     // md5
+    //     // sha256
         $pass = md5(md5($_POST['pass']));
         $login = $_POST['login'];
         
-        echo md5(md5($_POST['pass']));
+    //     // echo md5(md5($_POST['pass']));
 
 
-    }
+    // }
 
 ?>
 

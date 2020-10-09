@@ -9,7 +9,7 @@
     </nav>
     <nav class="header-nav">
         <a href="/Login/Login.php" class="header-nav-a">Войти</a>
-        <a href="#cart" class="header-nav-a">Корзина(0)</a>
+        <a href="/Pages/Cart/Index.php" class="header-nav-a">Корзина(0)</a>
     </nav>
     
 </header>
