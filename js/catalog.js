@@ -39,11 +39,7 @@ function getFormData(formName) {
 }
 
 function regenerateSubCategories(subCategories) {
-    let item = `
-        
-        `;
 
-    return item;
 }
 
 // button.onclick = () => {}

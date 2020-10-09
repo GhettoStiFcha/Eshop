@@ -61,14 +61,14 @@ class CatalogItems
         return $result;
     }
 
-    public function getItemsByPrice(int $from, int $to): array
+    public function getItemsByPrice(int $min, int $max): array
     {
         // 1. Подготавливаем запрос
         $statement = $this->connection->prepare('SELECT * FROM catalog WHERE price BETWEEN ? and ?');
         // 2. Указываем тип данных
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         // 3. Отправляем запрос в БД
-        $statement->execute([$from, $to]);
+        $statement->execute([$min, $max]);
         // 4. Указываем что сделать с данными после получения запроса
         $result = $statement->fetchAll();
 
