@@ -8,18 +8,18 @@ use Controllers\Catalog\CatalogItems;
 
 $item = new CatalogItems();
 $categories = new Categories();
-if (!empty($_GET)) {
+if ( !empty($_GET)) {
     echo json_encode(
-        [
-            'items' => $item->getItemsByAllParameters(
-                $_GET['price'],
-                $_GET['productName'],
-                $_GET['category']
-            ),
+            [
+                'items' => $item->getItemsByAllParameters(
+                    $_GET['price'],
+                    $_GET['productName'],
+                    $_GET['category']
+                ),
 
-            'category' => $categories->getChildCategories($_GET['category'])
-        ]
-    );
+                'category' => $item->searchCategory($_GET['category'])
+            ]
+        );
 
 } else if (isset ($_GET['from']) && isset($_GET['to']) ) {
     echo json_encode($item->getRangeItems($_GET['from'], $_GET['to']));

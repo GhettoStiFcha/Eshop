@@ -2,10 +2,12 @@
     require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 
     use Controllers\Catalog\Categories;
+    use Controllers\Catalog\CatalogItems;
 
     $categories = new Categories();
+    $items = new CatalogItems();
     $rootCategories = $categories->getRootCategories();
-    $childCategories = $categories->getChildCategories($parent);
+    // $childCategories = $items->searchCategory($category);
 
     // print_r($childCategories);
 ?>
@@ -38,9 +40,6 @@
             </select>
             <select name="subcategory">
                 <option hidden>Выберите подкатегорию</option>
-                <?php foreach($childCategories as $key => $value): ?>
-                    <option value="<?=$value['parent_id']?>"><?=$value['category_name']?></option>
-                <?php endforeach;?>
             </select>
             <select name="price">
                 <option hidden>Выберите стоимость</option>

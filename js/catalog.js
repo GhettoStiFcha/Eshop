@@ -39,7 +39,11 @@ function getFormData(formName) {
 }
 
 function regenerateSubCategories(subCategories) {
-
+    let optionAdd = '';
+    subCategories.forEach((value, index) => {
+        optionAdd += `<option value="${value['parent_id']}">${value['category_name']}</option>`;
+    })
+    insertDataIntoElement(optionAdd, '[name=subcategory]')
 }
 
 // button.onclick = () => {}

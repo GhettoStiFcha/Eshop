@@ -104,7 +104,7 @@ class CatalogItems
         return $result;
     }
 
-    private function searchCategory($category)
+    public function searchCategory($category)
     {
         $query = "SELECT * FROM categories WHERE parent_id = ?";
         // 1. Подготавливаем запрос
