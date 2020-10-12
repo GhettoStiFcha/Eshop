@@ -5,7 +5,7 @@
 
     $categories = new Categories();
     $rootCategories = $categories->getRootCategories();
-    $childCategories = $categories->getChildCategories();
+    $childCategories = $categories->getChildCategories($parent);
 
     // print_r($childCategories);
 ?>

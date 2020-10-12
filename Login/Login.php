@@ -4,23 +4,13 @@
 
     use Controllers\Sessions\UserData;
 
-    $userData = new UserData();
-    $user = $userData->getUserData();
-
-    // if(!empty($_POST)) {
-
-    //     // echo '<pre>';
-    //     // print_r($_POST);
-    //     // echo '</pre>';
-    //     // md5
-    //     // sha256
+    if(!empty($_POST)) {
         $pass = md5(md5($_POST['pass']));
         $login = $_POST['login'];
-        
-    //     // echo md5(md5($_POST['pass']));
 
-
-    // }
+        $userData = new UserData();
+        $user = $userData->getUserData($login, $pass);
+    }
 
 ?>
 

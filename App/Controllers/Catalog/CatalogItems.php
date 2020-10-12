@@ -20,7 +20,6 @@ class CatalogItems
 
     public function getItem(int $id)
     {
-
         // 1. Подготавливаем запрос
         $statement = $this->connection->prepare('SELECT * FROM catalog WHERE id=?');
         // 2. Указываем тип данных

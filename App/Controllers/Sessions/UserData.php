@@ -16,7 +16,7 @@ class UserData
         session_start();
     }
 
-    public function getUserData(string $login, string $pass): array
+    public function getUserData(?string $login = null, ?string $pass = null): array
     {
         $query = "SELECT * FROM users WHERE login = ? AND password = ?";
 
