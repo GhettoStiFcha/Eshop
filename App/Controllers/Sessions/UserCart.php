@@ -51,7 +51,8 @@ class UserCart implements CartInterface
             }
         }
         if ($_SESSION['item'][$itemNumber]['amount'] === 1) {
-            $_SESSION['item'][$itemNumber] = '';
+            // $_SESSION['item'][$itemNumber] = '';
+            unset($_SESSION['item'][$itemNumber]);
         } else if ($issetID) {
             $_SESSION['item'][$itemNumber]['amount']--;
         }

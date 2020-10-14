@@ -63,15 +63,10 @@ window.addEventListener('load', () => {
 
 catalog.price.addEventListener('change', () => {
     let allParameters = getFormData('catalog');
-    let XHR = getData(`/App/Controllers/Catalog/Catalog.php?${allParameters}`);
-    // 1. Получить значение поля
-    // let price = catalog.price.value;
-    // console.log(price);
-    // 2. Распарсить данные поля (разделить на два значения (integer))
-    // join()
-    // split()
-    // price = price.split('-');
-    // console.log(price);
+    let price = catalog.price.value;
+    console.log(price);
+    price = price.split('-');
+    let XHR = getData(`/App/Controllers/Catalog/Catalog.php?${allParameters}&min=${price[0]}&max=${price[1]}`);
     // 3. Сделать запрос на сервер
     // let XHR = getData(`/App/Controllers/Catalog/Catalog.php?min=${price[0]}&max=${price[1]}`);
     XHR.addEventListener('load', function () {

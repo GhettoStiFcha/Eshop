@@ -6,7 +6,7 @@ function getData(file) {
 }
 
 function addItemToCart(id) {
-    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}`);
+    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&status=add`);
     XHR.addEventListener('load', function () {
         let data = JSON.parse(XHR.responseText);
         console.log(data);
@@ -14,7 +14,7 @@ function addItemToCart(id) {
 };
 
 function removeItemFromCart(id) {
-    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}`);
+    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&status=remove`);
     XHR.addEventListener('load', function () {
         let data = JSON.parse(XHR.responseText);
         console.log(data);
