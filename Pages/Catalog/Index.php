@@ -27,7 +27,7 @@
         <?php include('C:\xampp\htdocs\inc\header.php'); ?>
         <nav class="breadcrumbs">
             <li class="breadcrumbs-item">
-                <a href="/pages/catalog" class="breadcrumbs-link">Главная</a>
+                <a href="/pages/catalog" class="breadcrumbs-link">Каталог</a>
             </li>
         </nav>
         <h1 class="default">Каталог товаров</h1>

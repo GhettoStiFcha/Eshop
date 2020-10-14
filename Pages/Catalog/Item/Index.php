@@ -27,13 +27,10 @@
         <?php include('C:\xampp\htdocs\inc\header.php'); ?>
         <nav class="breadcrumbs">
             <li class="breadcrumbs-item">
-                <a href="/pages/catalog" class="breadcrumbs-link">Главная</a>
+                <a href="/pages/catalog" class="breadcrumbs-link">Каталог</a>
             </li>
             <li class="breadcrumbs-item">
                 <a href="" class="breadcrumbs-link">Мужчинам</a>
-            </li>
-            <li class="breadcrumbs-item">
-                <a href="" class="breadcrumbs-link">Обувь</a>
             </li>
             <li class="breadcrumbs-item">
                 <a href="" class="breadcrumbs-link"><?=$item['name']?></a>

@@ -69,6 +69,36 @@ body {
     align-items: center;
     margin-bottom: 15px;
 }
+.mainH1{
+    margin-top: 50px;
+    margin-bottom: 0;
+    font-size: 52px;
+}
+.mainH1-down{
+    font-style: italic;
+    font-size: 24px;
+}
+.main-btn-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-btn{
+    margin-top: 20px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    padding: 14px 12px;
+    border: 1px solid black;
+}
+.main-grid{
+    display: grid;
+}
 .catalog{
     display: flex;
     justify-content: center;
