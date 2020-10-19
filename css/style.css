@@ -111,7 +111,6 @@ body {
     padding: 55px;
     background-color: #bbbbbb;
     color: white;
-    background-image: url(/images/1.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -167,7 +166,9 @@ body {
     padding: 10px;
 }
 .catalog-item-pic{
-    background: url(/images/catalog/1.jpg) center center / contain no-repeat;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
     height: 220px;
 }
 .catalog-item-name{
@@ -287,7 +288,9 @@ body {
 .item-image{
     height: 500px;
     width: 30%;
-    background: url(/images/catalog/1.jpg) center center / contain no-repeat;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 .item-article{
     font-size: 14px;

@@ -37,7 +37,7 @@
             </li>
         </nav>
         <section class="item">
-            <div class="item-image"></div>
+            <div class="item-image" style="background-image: url(<?=$item['image_url']?>)"></div>
             <div class="item-title"><?=$item['name']?></div>
             <div class="item-article">Артикул: 355655</div>
             <div class="item-price"><?=$item['price']?> руб.</div>
