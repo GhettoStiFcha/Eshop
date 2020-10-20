@@ -125,8 +125,96 @@ body {
 .main-grid-item:nth-child(1){
     grid-row: span 2;
 }
+.main-grid-item:nth-child(2){
+    font-size: 14px;
+    position: relative;
+}
+.main-grid-item:nth-child(2)::before{
+    position: absolute;
+    content: '!';
+    color: white;
+    font-size: 35px;
+    box-sizing: content-box;
+    padding: 2px 20px;
+    border: 2px solid white;
+    border-radius: 30px;
+    top: 7%;
+    bottom: 74%;
+    left: 40%;
+}
+.main-grid-item:nth-child(4) p{
+    position: relative;
+}
+.main-grid-item:nth-child(4) .p-text::before{
+    position: absolute;
+    transform: rotate(-45deg);
+    content: '';
+    box-sizing: content-box;
+    padding: 0 6px;
+    border: 2px solid white;
+    border-bottom: none;
+    border-right: none;
+    top: -95%;
+    bottom: 125%;
+    left: 35%;
+}
+.main-grid-item:nth-child(4) .p-text::after{
+    position: absolute;
+    transform: rotate(90deg);
+    content: '';
+    box-sizing: content-box;
+    background-color: white;
+    width: 2px;
+    top: -40px;
+    bottom: 10px;
+    left: 48%;
+}
+.main-grid-item:nth-child(6){
+    font-size: 14px;
+    position: relative;
+}
+.main-grid-item:nth-child(6)::before{
+    position: absolute;
+    content: '!';
+    color: white;
+    font-size: 35px;
+    box-sizing: content-box;
+    padding: 2px 20px;
+    border: 2px solid white;
+    border-radius: 30px;
+    top: 7%;
+    bottom: 74%;
+    left: 40%;
+}
 .main-grid-item:nth-child(7){
     grid-row: span 2;
+}
+.main-grid-item:nth-child(9) p{
+    position: relative;
+}
+.main-grid-item:nth-child(9) .p-text::before{
+    position: absolute;
+    transform: rotate(-45deg);
+    content: '';
+    box-sizing: content-box;
+    padding: 0 6px;
+    border: 2px solid white;
+    border-bottom: none;
+    border-right: none;
+    top: -95%;
+    bottom: 125%;
+    left: 35%;
+}
+.main-grid-item:nth-child(9) .p-text::after{
+    position: absolute;
+    transform: rotate(90deg);
+    content: '';
+    box-sizing: content-box;
+    background-color: white;
+    width: 2px;
+    top: -40px;
+    bottom: 10px;
+    left: 48%;
 }
 .catalog{
     display: flex;

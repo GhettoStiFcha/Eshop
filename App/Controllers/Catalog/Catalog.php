@@ -8,6 +8,7 @@ use Controllers\Catalog\CatalogItems;
 
 $item = new CatalogItems();
 $categories = new Categories();
+
 if ( !empty($_GET) && ($_GET['category'] != '')) {
     echo json_encode(
             [

@@ -1,3 +1,12 @@
+<?php
+    require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
+
+    use Controllers\Sessions\MainItems;
+
+    $main = new MainItems();
+
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -17,43 +26,13 @@
     <div class="main-btn-box">
         <a class="main-btn" href="/pages/catalog">ПОСМОТРЕТЬ НОВИНКИ</a>
     </div>
-    <div class="main-grid">
-        <div class="main-grid-item">
-            <p">ДЖИНСОВЫЕ КУРТКИ</p>
-            <p class="p-italic">NEW ARRIVAL</p>
-        </div>
-        <div class="main-grid-item">
-            <p class="p-small">Каждый сезон мы подготавливаем для Вас исключительно лучшую модну одежду. Следит за нашими новинками</p>
-        </div>
-        <div class="main-grid-item"></div>
-        <div class="main-grid-item">
-            <p>ЭЛЕГАНТНАЯ ОБУВЬ</p>
-            <p class="p-italic">БОТИНКИ, КРОСОВКИ</p>
-        </div>
-        <div class="main-grid-item">
-            <p>ДЖИНСЫ</p>
-            <p class="p-italic">от 3200 руб.</p>
-        </div>
-        <div class="main-grid-item">
-            <p class="p-small">Самые низкие цены в Москве. Нашли дешевле? Вернем разницу.</p>
-        </div>
-        <div class="main-grid-item">
-            <p>ДЕТСКАЯ ОДЕЖДА</p>
-            <p class="p-italic">NEW ARRIVAL</p>
-        </div>
-        <div class="main-grid-item"></div>
-        <div class="main-grid-item">
-            <p>АКСЕССУАРЫ</p>
-        </div>
-        <div class="main-grid-item">
-            <p>СПОРТИВНАЯ ОДЕЖДА</p>
-            <p class="p-italic">от 590 руб.</p>
-        </div>
-    </div>
+    <div class="main-grid"></div>
     
 
     <?php include('C:\xampp\htdocs\inc\footer.php'); ?>
     </div>
+
+    <script src="/js/main.js"></script>
 </body>
 
 </html>

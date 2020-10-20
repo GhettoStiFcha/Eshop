@@ -12,10 +12,9 @@ class CatalogItems
 
     public function __construct()
     {
-        $this->connection = MysqlConnection::connect();
 
-        // $db = new MysqlConnection();
-        // $this->connection = $db->connect();
+        $this->connection = MysqlConnection::connect();
+        
     }
 
     public function getItem(int $id)

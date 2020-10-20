@@ -7,10 +7,8 @@
     $categories = new Categories();
     $items = new CatalogItems();
     $rootCategories = $categories->getRootCategories();
-    // $childCategories = $items->searchCategory($category);
-
-    // print_r($childCategories);
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
 

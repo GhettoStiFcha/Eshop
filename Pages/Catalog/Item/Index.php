@@ -1,6 +1,4 @@
-<?php
-    // print_r($_GET['id'])
-?>
+
 <?php
     require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 
