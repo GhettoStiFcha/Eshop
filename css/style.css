@@ -97,7 +97,7 @@ body {
     border: 1px solid black;
 }
 .main-grid{
-    margin-top: 20px;
+    margin: 20px 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     grid-auto-rows: minmax(280px, auto);
@@ -215,6 +215,61 @@ body {
     top: -40px;
     bottom: 10px;
     left: 48%;
+}
+.subscribe-form-box{
+    margin: 10px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 15px;
+}
+.email-uppertext{
+    font-size: 36px;
+    font-weight: 400;
+}
+.email-lowertext{
+    font-size: 18px;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+.email-form{
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+}
+.email-form-item{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    box-sizing: border-box;
+}
+.email-form-input{
+    border: 2px solid #959595;
+    border-right: none;
+    padding: 13px;
+    outline: none;
+    font-style: normal;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.email-form-submit{
+    border: 2px solid #e67429;
+    background-color: #f68236;
+    color: white;
+    padding: 13px;
+    outline: none;
+    font-style: normal;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+::placeholder{
+    color: #e6742999;
 }
 .catalog{
     display: flex;
