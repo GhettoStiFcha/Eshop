@@ -56,7 +56,7 @@ foreach($jo as $key => $value) {
             <?php else: ?>
                 <?php foreach($jo as $key => $value): ?>
                 <div>
-                    <div class="cart-item">
+                    <div class="cart-item" id="cartItem">
                         <div class="cart-item-div cart-item-pic" style="background-image: url(?)"></div>
                         <div class="cart-item-div cart-item-text">
                             <div class="cart-item-div cart-item-name"><?=$value['name']?></div>
@@ -71,7 +71,7 @@ foreach($jo as $key => $value) {
                             </div>
                         </div>
                         <div class="cart-item-div cart-item-price w10"><?=$value['price']?> руб.</div>
-                        <div class="cart-item-div cart-item-delete w10" onclick="deleteItemFromCart(<?=$value['id']?>)"></div>   
+                        <div class="cart-item-div cart-item-delete w10" onclick="deleteItemFromCart(<?=$value['id']?>), document.getElementById('cartItem').style.display = 'none'"></div>   
                     </div>
                 </div>
                 <?php endforeach; ?>
