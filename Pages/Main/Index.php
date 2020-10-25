@@ -27,8 +27,8 @@
         <a class="main-btn" href="/pages/catalog">ПОСМОТРЕТЬ НОВИНКИ</a>
     </div>
     <div class="main-grid"></div>
+    
     <?php include('C:\xampp\htdocs\inc\emailForm.php'); ?>
-
     <?php include('C:\xampp\htdocs\inc\footer.php'); ?>
     </div>
 

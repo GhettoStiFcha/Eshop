@@ -20,3 +20,11 @@ function removeItemFromCart(id) {
         console.log(data);
     });
 };
+
+function deleteItemFromCart(id) {
+    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&status=delete`);
+    XHR.addEventListener('load', function () {
+        let data = JSON.parse(XHR.responseText);
+        console.log(data);
+    });
+};

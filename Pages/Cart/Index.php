@@ -55,10 +55,30 @@ foreach($jo as $key => $value) {
                 <p>В корзине пока нет товаров</p>
             <?php else: ?>
                 <?php foreach($jo as $key => $value): ?>
-                <div><b><?=$value['name']?>(<?=$value['amount']?>):</b> <?=$value['price']?> руб.</div>
+                <div>
+                    <div class="cart-item">
+                        <div class="cart-item-div cart-item-pic" style="background-image: url(?)"></div>
+                        <div class="cart-item-div cart-item-text">
+                            <div class="cart-item-div cart-item-name"><?=$value['name']?></div>
+                            <div class="cart-item-div cart-item-article">арт. 123412</div>
+                        </div>
+                        <div class="cart-item-div cart-item-size w10">M</div>
+                        <div class="cart-item-div cart-item-amount w10">
+                            <div class="cart-item-amount-text"><?=$value['amount']?></div>
+                            <div class="cart-item-amount-button-box">
+                                <div class="cart-item-amount-button" onclick="addItemToCart(<?=$value['id']?>)">+</div>
+                                <div class="cart-item-amount-button" onclick="removeItemFromCart(<?=$value['id']?>)">-</div>
+                            </div>
+                        </div>
+                        <div class="cart-item-div cart-item-price w10"><?=$value['price']?> руб.</div>
+                        <div class="cart-item-div cart-item-delete w10" onclick="deleteItemFromCart(<?=$value['id']?>)"></div>   
+                    </div>
+                </div>
                 <?php endforeach; ?>
             <?php endif; ?>
+            
             <?php include('C:\xampp\htdocs\inc\footer.php'); ?>
+            <script src="/js/addToCart.js"></script>
         </div>
     </div>
 </body>

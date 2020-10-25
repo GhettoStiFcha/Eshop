@@ -122,7 +122,7 @@ body {
     font-style: italic;
     font-size: 14px;
 }
-.main-grid-item:nth-child(1){
+.main-grid-item:nth-child(3n+1):nth-child(odd){
     grid-row: span 2;
 }
 .main-grid-item:nth-child(2){
@@ -185,9 +185,6 @@ body {
     top: 7%;
     bottom: 74%;
     left: 40%;
-}
-.main-grid-item:nth-child(7){
-    grid-row: span 2;
 }
 .main-grid-item:nth-child(9) p{
     position: relative;
@@ -503,4 +500,86 @@ body {
 .word:nth-child(2){
     width: 50%;
     text-align: start;
+}
+.w10{
+    width: 10%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.cart-item{
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #00000020;
+    height: 135px;
+    box-sizing: border-box;
+    padding: 2px;
+}
+.cart-item-div{
+    margin: 0 5px;
+}
+.cart-item-pic{
+    height: 100px;
+    width: 100px;
+    border: 1px solid #00000020;
+    margin-right: 15px !important;
+}
+.cart-item-text{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    text-align: start;
+}
+.cart-item-name{
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700px;
+}
+.cart-item-article{
+    font-size: 12px;
+    color: #00000050;
+}
+.cart-item-size{
+    font-size: 16px;
+}
+.cart-item-amount{
+    display: flex;
+}
+.cart-item-amount-button-box{
+    display: flex;
+    flex-direction: column;
+}
+.cart-item-amount-button{
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    box-sizing: border-box;
+    margin: 2px 5px;
+    padding: 1px 5px;
+    text-transform: lowercase;
+    font-size: 12px;
+}
+.cart-item-delete{
+    cursor: pointer;
+    background-color: white;
+    height: 15px;
+}
+.cart-item-delete::before{
+    content: '';
+    position: absolute;
+    top: 42.5%;
+    bottom: 42.5%;
+    background-color: black;
+    width: 1px;
+    transform: rotate(45deg);
+}
+.cart-item-delete::after{
+    content: '';
+    position: absolute;
+    top: 42.5%;
+    bottom: 42.5%;
+    background-color: black;
+    width: 1px;
+    transform: rotate(-45deg);
 }

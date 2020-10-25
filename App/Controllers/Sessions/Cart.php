@@ -12,7 +12,9 @@ if ($_GET['status'] === 'add') {
     echo json_encode($item->addItem($_GET['id']));
 } else if ($_GET['status'] === 'remove') {
     echo json_encode($item->removeItem($_GET['id']));
-}
+} else if ($_GET['status'] === 'delete') {
+    echo json_encode($item->deleteItem($_GET['id']));
+} 
 
 
 
