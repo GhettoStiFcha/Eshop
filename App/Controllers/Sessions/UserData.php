@@ -16,7 +16,7 @@ class UserData
         session_start();
     }
 
-    public function getUserData(?string $login = null, ?string $pass = null): array
+    public function getUserData(?string $login = null, ?string $pass = null)
     {
         $query = "SELECT * FROM users WHERE login = ? AND password = ?";
 
@@ -26,7 +26,22 @@ class UserData
         
         $statement->execute([$login, $pass]);
         
-        $result = $statement->fetchAll();
+        $result = $statement->fetch();
+
+        return $result;
+    }
+
+    public function getUserDataById(?int $id)
+    {
+        $query = "SELECT * FROM users WHERE id = ?";
+
+        $statement = $this->connection->prepare($query);
+
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        
+        $statement->execute([$id]);
+        
+        $result = $statement->fetch();
 
         return $result;
     }

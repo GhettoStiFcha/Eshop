@@ -20,7 +20,7 @@
 
 <body>
     <div class="wrapper">
-    <?php include('C:\xampp\htdocs\inc\header.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\header.php'); ?>
     <h1 class="default mainH1">НОВЫЕ ПОСТУПЛЕНИЯ ОСЕНИ</h1>
     <p class="default mainH1-down">Мы подготовили для Вас лучшие новинки сезона</p>
     <div class="main-btn-box">
@@ -28,8 +28,8 @@
     </div>
     <div class="main-grid"></div>
     
-    <?php include('C:\xampp\htdocs\inc\emailForm.php'); ?>
-    <?php include('C:\xampp\htdocs\inc\footer.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\emailForm.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\footer.php'); ?>
     </div>
 
     <script src="/js/main.js"></script>

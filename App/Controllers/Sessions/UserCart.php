@@ -32,9 +32,9 @@ class UserCart implements CartInterface
             ];
         }
 
-        print_r($_SESSION['item']);
+        // print_r($_SESSION['item']);
         // session_destroy();
-        return count($_SESSION['item']);
+        return $_SESSION['item'][$itemNumber]['amount'];
         
     }
 

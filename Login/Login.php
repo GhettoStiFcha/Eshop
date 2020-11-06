@@ -4,19 +4,36 @@
 
     use Controllers\Sessions\UserData;
 
+    $loginError = '';
+
+    session_start();
+    if (!empty($_SESSION['user_id'])) {
+        header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
+    }
+
     if(!empty($_POST)) {
         $pass = md5(md5($_POST['pass']));
         $login = $_POST['login'];
 
         $userData = new UserData();
         $user = $userData->getUserData($login, $pass);
+        
+        if (!empty($user)) {
+            $_SESSION['user_id'] = $user['id'];
+            session_start();
+            // print_r($_SESSION);
+            header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
+        } else {
+            $loginError =  'Неверные имя пользователя или пароль.';
+        }
     }
 
+    // print_r($_SESSION);
 ?>
 
 
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -28,14 +45,25 @@
 
 <body>
     <div class="wrapper">
-        <?php include('C:\xampp\htdocs\inc\header.php'); ?>
-        <h1 class="login-h1">Вход в личный кабинет</h1>
-        <form action="" method="POST">
-            <input type="text" name="login" placeholder="Введите логин">
-            <input type="password" name="pass" placeholder="Введите пароль">
-            <input type="submit" value="Войти">
-        </form>
-        <?php include('C:\xampp\htdocs\inc\footer.php'); ?>
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\header.php'); ?>
+
+        <div class="fullscreen">
+            <h1 class="login-h1">вход в личный кабинет</h1>
+            <form class="login-form" method="POST">
+                <div class="form-item">
+                    <input class ="login-form-input" type="text" name="login" placeholder="Введите логин">
+                </div>
+                <div class="form-item">
+                    <input class ="login-form-input" type="password" name="pass" placeholder="Введите пароль">
+                </div>
+                <div class="form-item">
+                    <input class ="login-form-submit" type="submit" value="Войти">
+                </div>
+                <?=$loginError;?>
+            </form>
+        </div>
+        
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\footer.php'); ?>
     </div>
 </body>
 

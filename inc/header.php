@@ -1,3 +1,17 @@
+<?php
+    use Controllers\Sessions\UserData;
+    $userData = new UserData();
+    if(isset($_SESSION['user_id'])) {
+        $userID = $userData->getUserDataById($_SESSION['user_id']);
+        $loginBtn = $userID['name'];
+        $loginLink = 'Account.php';
+        // print_r($user);
+    } else {
+        $loginBtn = 'Войти';
+        $loginLink = 'Login.php';
+    }
+?>
+
 <header class="header">
     <nav class="header-nav">
         <a class="header-logo" href="/pages/main"></a>
@@ -8,7 +22,7 @@
         <a href="#contacts" class="header-nav-a">О нас</a>
     </nav>
     <nav class="header-nav">
-        <a href="/Login/Login.php" class="header-nav-a">Войти</a>
+        <a href="/Login/<?=$loginLink?>" class="header-nav-a"><?=$loginBtn?></a>
         <a href="/Pages/Cart/" class="header-nav-a">Корзина(0)</a>
     </nav>
     

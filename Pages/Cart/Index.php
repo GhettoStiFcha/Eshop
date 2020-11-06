@@ -26,6 +26,8 @@ foreach($jo as $key => $value) {
     }
 }
 
+print_r($value);
+
 ?>
 
 <!DOCTYPE html>
@@ -57,21 +59,21 @@ foreach($jo as $key => $value) {
                 <?php foreach($jo as $key => $value): ?>
                 <div>
                     <div class="cart-item" id="cartItem">
-                        <div class="cart-item-div cart-item-pic" style="background-image: url(?)"></div>
+                        <div class="cart-item-div cart-item-pic" style="background-image: url(<?=$value['image_url']?>)"></div>
                         <div class="cart-item-div cart-item-text">
                             <div class="cart-item-div cart-item-name"><?=$value['name']?></div>
                             <div class="cart-item-div cart-item-article">арт. 123412</div>
                         </div>
                         <div class="cart-item-div cart-item-size w10">M</div>
                         <div class="cart-item-div cart-item-amount w10">
-                            <div class="cart-item-amount-text"><?=$value['amount']?></div>
+                            <div class="cart-item-amount-text" id="item-<?=$value['id']?>"><?=$value['amount']?></div>
                             <div class="cart-item-amount-button-box">
-                                <div class="cart-item-amount-button" onclick="addItemToCart(<?=$value['id']?>)">+</div>
+                                <div class="cart-item-amount-button" onclick="addAmount(<?=$value['id']?>)">+</div>
                                 <div class="cart-item-amount-button" onclick="removeItemFromCart(<?=$value['id']?>)">-</div>
                             </div>
                         </div>
                         <div class="cart-item-div cart-item-price w10"><?=$value['price']?> руб.</div>
-                        <div class="cart-item-div cart-item-delete w10" onclick="deleteItemFromCart(<?=$value['id']?>), document.getElementById('cartItem').style.display = 'none'"></div>   
+                        <div class="cart-item-div cart-item-delete w10" onclick="deleteItemFromCart(<?=$value['id']?>), this.document.getElementById('cartItem').style.display = 'none'"></div>   
                     </div>
                 </div>
                 <?php endforeach; ?>

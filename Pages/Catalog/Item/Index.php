@@ -22,7 +22,7 @@
 
 <body>
     <div class="wrapper">
-        <?php include('C:\xampp\htdocs\inc\header.php'); ?>
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\header.php'); ?>
         <nav class="breadcrumbs">
             <li class="breadcrumbs-item">
                 <a href="/pages/catalog" class="breadcrumbs-link">Каталог</a>
@@ -53,7 +53,7 @@
             <div class="btn card-btn" onclick="removeItemFromCart(<?=$item['id']?>)">Удалить из корзины</div>
         </section>
             
-        <?php include('C:\xampp\htdocs\inc\footer.php'); ?>
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\footer.php'); ?>
     </div>
 
     <script src="/js/addToCart.js"></script>

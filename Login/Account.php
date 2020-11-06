@@ -1,3 +1,24 @@
+<?php
+
+    require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
+
+    use Controllers\Sessions\UserData;
+    $userData = new UserData();
+
+    // session_start();
+
+    if(isset($_SESSION['user_id'])) {
+        $user = $userData->getUserDataById($_SESSION['user_id']);
+        // print_r($user);
+    } else {
+        header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Login.php');
+    }
+
+    // print_r($_SESSION);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -11,4 +32,13 @@
 
 <body>
     <h1>Личный кабинет</h1>
+    <div class="hello">
+        Доброго времени суток, <?=$user['name']?>!
+    </div>
+    <div class="login-destroy-btn">
+        session_destroy
+    </div>
+
+    
+
 </body>

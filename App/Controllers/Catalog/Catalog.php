@@ -9,7 +9,8 @@ use Controllers\Catalog\CatalogItems;
 $item = new CatalogItems();
 $categories = new Categories();
 
-if ( !empty($_GET) && ($_GET['category'] != '')) {
+
+if (!empty($_GET) && ($_GET['category'] != '')) {
     echo json_encode(
             [
                 'items' => $item->getItemsByAllParameters(
@@ -22,11 +23,33 @@ if ( !empty($_GET) && ($_GET['category'] != '')) {
             ]
         );
 
-} else if (!empty($_GET) && ($_GET['category'] === '')) {
+} else if (!empty($_GET) && ($_GET['category'] === '') && ($_GET['price'] !== '') && ($_GET['productName'] === '')) {
+    $price = explode('-', $_GET['price']);
     echo json_encode(
         [
             'items' => $item->getItemsByPrice(
-                $_GET['min'], $_GET['max']
+                $price[0], $price[1]
+            ),
+
+            'category' => $item->searchCategory($_GET['category'])
+        ]
+    );
+} else if (!empty($_GET) && ($_GET['category'] === '') && ($_GET['price'] === '')) {
+    echo json_encode(
+        [
+            'items' => $item->getItemsByName(
+                $_GET['productName']
+            ),
+
+            'category' => $item->searchCategory($_GET['category'])
+        ]
+    );
+} else if (!empty($_GET) && ($_GET['price'] !== '') && ($_GET['productName'] !== '')) {
+    echo json_encode(
+        [
+            'items' => $item->getItemsByCoupleParameters(
+                $_GET['price'],
+                $_GET['productName']
             ),
 
             'category' => $item->searchCategory($_GET['category'])

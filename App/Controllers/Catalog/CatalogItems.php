@@ -135,6 +135,42 @@ class CatalogItems
         return $result;
     }
 
+    public function getItemsByCoupleParameters(string $price, string $name): array
+    {
+        $parametersArray = [];
+
+        $insertString = "%$name%";
+
+        if  ($price !== '') {
+            $priceArray = explode('-', $price);
+            array_unshift($parametersArray, $priceArray[0], $priceArray[1]);
+        }
+        // $priceString = 'price > 0';
+        // if (price !== '') {
+        //     $priceString = 'price BETWEEN ? AND ?';
+        // }
+        $priceString = ($price !== '') ? '(price BETWEEN ? AND ?)' : 'price > 0';
+
+        if ($name !== '') {
+            $nameString = 'AND name LIKE ?';
+            array_push($parametersArray, $insertString);
+        } else {
+            $nameString = '';
+        };
+
+        $query = "SELECT * FROM catalog WHERE $priceString $nameString";
+        // 1. Подготавливаем запрос
+        $statement = $this->connection->prepare($query);
+        // 2. Указываем тип данных
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        // 3. Отправляем запрос в БД
+        $statement->execute($parametersArray);
+        // 4. Указываем что сделать с данными после получения запроса
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+
     public function getItemsByAllParameters(string $price, string $name, int $category): array
     {
         $parametersArray = [];

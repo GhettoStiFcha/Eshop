@@ -22,7 +22,7 @@
 
 <body>
     <div class="wrapper">
-        <?php include('C:\xampp\htdocs\inc\header.php'); ?>
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\header.php'); ?>
         <nav class="breadcrumbs">
             <li class="breadcrumbs-item">
                 <a href="/pages/catalog" class="breadcrumbs-link">Каталог</a>
@@ -41,8 +41,8 @@
             </select>
             <select name="price">
                 <option hidden>Выберите стоимость</option>
-                <option value="6000-10000">6000-10000</option>
-                <option value="10000-12000">10000-12000</option>
+                <option value="0-6000">0-6000</option>
+                <option value="6000-12000">6000-12000</option>
                 <option value="12000-17000">12000-17000</option>
                 <option value="17000-20000">17000-20000</option>
             </select>
@@ -50,7 +50,7 @@
         </form>
         <div class="catalog"></div>
         
-        <?php include('C:\xampp\htdocs\inc\footer.php'); ?>
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\footer.php'); ?>
     </div>
     
 

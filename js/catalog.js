@@ -39,7 +39,7 @@ function getFormData(formName) {
 }
 
 function regenerateSubCategories(subCategories) {
-    let optionAdd = '';
+    let optionAdd = `<option hidden>Выберите подкатегорию</option>`;
     subCategories.forEach((value, index) => {
         optionAdd += `<option value="${value['parent_id']}">${value['category_name']}</option>`;
     })
@@ -111,6 +111,7 @@ catalog.category.addEventListener('change', () => {
 catalog.productName.addEventListener('keyup', () => {
     // 1. Получить значение поля
     let allParameters = getFormData('catalog');
+    console.log(allParameters);
     // console.log(productName);
     let XHR = getData(`/App/Controllers/Catalog/Catalog.php?${allParameters}`);
     XHR.addEventListener('load', function () {
