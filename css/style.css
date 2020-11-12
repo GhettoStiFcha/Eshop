@@ -445,7 +445,7 @@ body {
     font-style: italic;
     margin: 15px;
 }
-.item-discription{
+.item-description{
     font-size: 14px;
     text-align: center;
 }
@@ -465,7 +465,7 @@ body {
 .item-size:hover{
     transform: scale(1.1, 1.1);
 }
-.card-btn{
+.cart-btn{
     color: #ffffff;
     background-color: #f68236;
     box-sizing: border-box;
@@ -524,6 +524,9 @@ body {
     width: 100px;
     border: 1px solid #00000020;
     margin-right: 15px !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 .cart-item-text{
     display: flex;
@@ -628,4 +631,24 @@ body {
     justify-content: center;
     align-items: center;
     height: 77vh !important;
+}
+.account-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.account-h1{
+    font-weight: 300;
+    font-size: 30px;
+}
+.login-destroy-btn{
+    text-decoration: none;
+    color: #ffffff;
+    border: 2px solid #070ad5;
+    background-color: #125be4;
+    box-sizing: border-box;
+    padding: 10px;
+    cursor: pointer;
+    margin: 20px 0;
 }

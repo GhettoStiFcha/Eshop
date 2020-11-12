@@ -3,11 +3,21 @@
     require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 
     use Controllers\Catalog\CatalogItems;
+    use Controllers\Catalog\Sizes;
 
     $catalog = new CatalogItems();
     $item = $catalog->getItem($_GET['id']);
 
-    // print_r($rootCategories);
+    $size = new Sizes();
+    $getItemSize = $size->getItemSizes($_GET['id']);
+
+    $filteredSizes = [];
+    foreach($getItemSize as $index => $value){
+        $filteredSizes[] = $size->getSizes($value['size_id']);
+    }
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -37,26 +47,25 @@
         <section class="item">
             <div class="item-image" style="background-image: url(<?=$item['image_url']?>)"></div>
             <div class="item-title"><?=$item['name']?></div>
-            <div class="item-article">Артикул: 355655</div>
+            <div class="item-article">Артикул: <?=$item['article']?></div>
             <div class="item-price"><?=$item['price']?> руб.</div>
-            <div class="item-discription">
-                Отличные кроссовки из водонепроницаемого материала. Отлично подходят для любой погоды. 
-                Приятно сидят на ноге, стильные и комфортные.
-            </div>
-            <div class="item-size-box">
-                <div class="item-size">41</div>
-                <div class="item-size">42</div>
-                <div class="item-size">43</div>
-                <div class="item-size">44</div>
-            </div>
-            <div class="btn card-btn" onclick="addItemToCart(<?=$item['id']?>)">Добавить в корзину</div>
-            <div class="btn card-btn" onclick="removeItemFromCart(<?=$item['id']?>)">Удалить из корзины</div>
+            <div class="item-description"><?=$item['description']?></div>
+            <form class="item-size-box" id="itemSizes">
+                <?php foreach($filteredSizes as $index => $sizes): ?>
+                    <?php foreach($sizes as $index => $value): ?>
+                        <input type="checkbox" class="item-size" value="<?=$value['id']?>"><?=$value['size']?></option>
+                    <?php endforeach;?>
+                <?php endforeach;?>
+            </form>
+            <div class="btn cart-btn" onclick="addItemToCart(<?=$item['id']?>)">Добавить в корзину</div>
+            <div class="btn cart-btn" onclick="removeItemFromCart(<?=$item['id']?>)">Удалить из корзины</div>
         </section>
             
         <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\footer.php'); ?>
     </div>
 
     <script src="/js/addToCart.js"></script>
+    <!-- <script src="/js/sizes.js"></script> -->
 </body>
 
 </html>

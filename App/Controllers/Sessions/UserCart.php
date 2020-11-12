@@ -57,9 +57,10 @@ class UserCart implements CartInterface
             $_SESSION['item'][$itemNumber]['amount']--;
         }
 
-        print_r($_SESSION['item']);
+        // print_r($_SESSION['item']);
         // session_destroy();
-        return count($_SESSION['item']);
+        // return count($_SESSION['item']);
+        return $_SESSION['item'][$itemNumber]['amount'];
     }
 
     public function deleteItem(int $id)

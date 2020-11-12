@@ -14,7 +14,6 @@
         header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Login.php');
     }
 
-    // print_r($_SESSION);
 
 ?>
 
@@ -31,14 +30,21 @@
 </head>
 
 <body>
-    <h1>Личный кабинет</h1>
-    <div class="hello">
-        Доброго времени суток, <?=$user['name']?>!
+    <div class="wrapper">
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\header.php'); ?>
+        <div class="account-box">
+            <h1 class="account-h1">Личный кабинет</h1>
+            <div class="hello">
+                Доброго времени суток, <?=$user['name']?>!
+            </div>
+            <a href="/Login/Login.php" class="login-destroy-btn" onclick="sessionDestroy()">
+                Выйти
+            </a>
+        </div>
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\footer.php'); ?>
     </div>
-    <div class="login-destroy-btn">
-        session_destroy
-    </div>
-
     
 
+    
+    <script src="/js/account.js"></script>
 </body>

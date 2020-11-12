@@ -43,5 +43,17 @@ function addAmount(id) {
 }
 
 function removeAmount(id) {
-
+    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&status=remove`);
+    XHR.addEventListener('load', function () {
+        let data = JSON.parse(XHR.responseText);
+        insertDataIntoElement(data, `#item-${id}`);
+    });
 }
+
+// function deleteAmount(id) {
+//     let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&status=delete`);
+//     XHR.addEventListener('load', function () {
+//         let data = JSON.parse(XHR.responseText);
+//         this.document.getElementById(`#item-${id}`).style.display = 'none';
+//     });
+// }

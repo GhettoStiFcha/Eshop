@@ -10,6 +10,13 @@
         $loginBtn = 'Войти';
         $loginLink = 'Login.php';
     }
+
+    if(!empty($_SESSION)) {
+        $itemAmount = count($_SESSION['item']);
+    } else {
+        $itemAmount = '0';
+    }
+    
 ?>
 
 <header class="header">
@@ -23,7 +30,7 @@
     </nav>
     <nav class="header-nav">
         <a href="/Login/<?=$loginLink?>" class="header-nav-a"><?=$loginBtn?></a>
-        <a href="/Pages/Cart/" class="header-nav-a">Корзина(0)</a>
+        <a href="/Pages/Cart/" class="header-nav-a">Корзина(<?=$itemAmount?>)</a>
     </nav>
     
 </header>

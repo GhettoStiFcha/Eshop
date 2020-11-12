@@ -26,7 +26,7 @@ foreach($jo as $key => $value) {
     }
 }
 
-print_r($value);
+// print_r($value);
 
 ?>
 
@@ -69,11 +69,11 @@ print_r($value);
                             <div class="cart-item-amount-text" id="item-<?=$value['id']?>"><?=$value['amount']?></div>
                             <div class="cart-item-amount-button-box">
                                 <div class="cart-item-amount-button" onclick="addAmount(<?=$value['id']?>)">+</div>
-                                <div class="cart-item-amount-button" onclick="removeItemFromCart(<?=$value['id']?>)">-</div>
+                                <div class="cart-item-amount-button" onclick="removeAmount(<?=$value['id']?>)">-</div>
                             </div>
                         </div>
                         <div class="cart-item-div cart-item-price w10"><?=$value['price']?> руб.</div>
-                        <div class="cart-item-div cart-item-delete w10" onclick="deleteItemFromCart(<?=$value['id']?>), this.document.getElementById('cartItem').style.display = 'none'"></div>   
+                        <div class="cart-item-div cart-item-delete w10" onclick="deleteItemFromCart(<?=$value['id']?>)"></div> 
                     </div>
                 </div>
                 <?php endforeach; ?>
