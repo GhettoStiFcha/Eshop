@@ -6,8 +6,10 @@ require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 
 use Controllers\Sessions\UserCart;
 use Controllers\Catalog\CatalogItems;
+use Controllers\Catalog\Sizes;    
 
 $item = new UserCart();
+$size = new Sizes();
 
 $cart = $item->getAllItems();
 $cartItems = $item->getItemsIDs();
@@ -16,17 +18,20 @@ $catalog = new CatalogItems();
 
 $jo = $catalog->getItemsByMultipleIDs($cartItems);
 
-foreach($jo as $key => $value) {
+foreach($jo as $key => $value) { 
     $id = $value['id'];
     foreach($cart as $index => $cartAmount) {
+        $filteredSize = $size->getSizes($cartAmount['size_id']);
         if ((int)$id === (int)$cartAmount['id']) {
             $jo[$key]['amount'] = $cartAmount['amount'];
+            $jo[$key]['size'] = $filteredSize[0]['size'];
+            $jo[$key]['size_id'] = $cartAmount['size_id'];
             break;
-        } 
+        }
     }
 }
 
-// print_r($value);
+
 
 ?>
 
@@ -64,11 +69,11 @@ foreach($jo as $key => $value) {
                             <div class="cart-item-div cart-item-name"><?=$value['name']?></div>
                             <div class="cart-item-div cart-item-article">арт. 123412</div>
                         </div>
-                        <div class="cart-item-div cart-item-size w10">M</div>
+                        <div class="cart-item-div cart-item-size w10"><?=$value['size']?></div>
                         <div class="cart-item-div cart-item-amount w10">
                             <div class="cart-item-amount-text" id="item-<?=$value['id']?>"><?=$value['amount']?></div>
                             <div class="cart-item-amount-button-box">
-                                <div class="cart-item-amount-button" onclick="addAmount(<?=$value['id']?>)">+</div>
+                                <div class="cart-item-amount-button" onclick="addAmount(<?=$value['id']?>,<?=$value['size_id']?>)">+</div>
                                 <div class="cart-item-amount-button" onclick="removeAmount(<?=$value['id']?>)">-</div>
                             </div>
                         </div>

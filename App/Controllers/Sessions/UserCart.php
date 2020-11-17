@@ -11,7 +11,7 @@ class UserCart implements CartInterface
         session_start();
     }
 
-    public function addItem(int $id): int
+    public function addItem(int $id, ?int $size): int
     {
         $issetID = false;
         $itemNumber = 0;
@@ -28,7 +28,8 @@ class UserCart implements CartInterface
         } else {
             $_SESSION['item'][] = [
                 'id' => $id,
-                'amount' => 1
+                'amount' => 1,
+                'size_id' => $size
             ];
         }
 

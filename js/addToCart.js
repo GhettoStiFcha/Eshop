@@ -10,8 +10,24 @@ function getData(file) {
     return XHR;
 }
 
+function getFormData(formName) {
+    let form = document.forms[formName];
+    let stringParameters = '';
+    let convertedValues = ['Выберите размер'];
+    console.log(form);
+    for (let i = 0; i < form.length; i++) {
+        let convertedValue = form[i].value;
+        if (convertedValues.includes(form[i].value)) convertedValue = '';
+        stringParameters += `&${form[i].name}=${convertedValue}`;
+    }
+    stringParameters = stringParameters.slice(1);
+    console.log(stringParameters);
+    return stringParameters
+}
+
 function addItemToCart(id) {
-    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&status=add`);
+    let allParameters = getFormData('itemSizes');
+    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&${allParameters}&status=add`);
     XHR.addEventListener('load', function () {
         let data = JSON.parse(XHR.responseText);
     });
@@ -33,8 +49,8 @@ function deleteItemFromCart(id) {
     });
 };
 
-function addAmount(id) {
-    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&status=add`);
+function addAmount(id, size) {
+    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&size=${size}&status=add`);
     XHR.addEventListener('load', function () {
         let data = JSON.parse(XHR.responseText);
         insertDataIntoElement(data, `#item-${id}`);
@@ -57,3 +73,4 @@ function removeAmount(id) {
 //         this.document.getElementById(`#item-${id}`).style.display = 'none';
 //     });
 // }
+

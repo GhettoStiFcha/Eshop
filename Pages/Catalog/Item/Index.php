@@ -16,6 +16,7 @@
         $filteredSizes[] = $size->getSizes($value['size_id']);
     }
 
+    print_r($_GET);
 
 
 ?>
@@ -51,14 +52,17 @@
             <div class="item-price"><?=$item['price']?> руб.</div>
             <div class="item-description"><?=$item['description']?></div>
             <form class="item-size-box" id="itemSizes">
-                <?php foreach($filteredSizes as $index => $sizes): ?>
-                    <?php foreach($sizes as $index => $value): ?>
-                        <input type="checkbox" class="item-size" value="<?=$value['id']?>"><?=$value['size']?></option>
-                    <?php endforeach;?>
-                <?php endforeach;?>
+                <select name="size" class="input-box">
+                    <option hidden>Выберите размер</option>
+                    <?php foreach($filteredSizes as $index => $sizes): ?>
+                        <?php foreach($sizes as $index => $value): ?>
+                            <option class="item-size" value="<?=$value['id']?>"><?=$value['size']?></option>
+                        <?php endforeach;?>
+                    <?php endforeach;?> 
+                </select>
+                <div id="addButton" class="btn cart-btn" onclick="addItemToCart(`<?=$item['id']?>`);">Добавить в корзину</div>
+                <input type="submit" value="Удалить из корзины" class="btn cart-btn" onclick="removeItemFromCart(<?=$item['id']?>)">
             </form>
-            <div class="btn cart-btn" onclick="addItemToCart(<?=$item['id']?>)">Добавить в корзину</div>
-            <div class="btn cart-btn" onclick="removeItemFromCart(<?=$item['id']?>)">Удалить из корзины</div>
         </section>
             
         <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\footer.php'); ?>

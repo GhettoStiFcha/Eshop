@@ -14,7 +14,7 @@ class Sizes
         $this->connection = MysqlConnection::connect();
     }
 
-    public function getItemSizes(int $id): array
+    public function getItemSizes(?int $id): array
     {
         // 1. Подготавливаем запрос
         $statement = $this->connection->prepare('SELECT size_id FROM added_sizes WHERE product_id=?');
