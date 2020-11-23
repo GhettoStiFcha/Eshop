@@ -277,7 +277,6 @@ body {
     padding: 15px;
 }
 .catalog-form select, input{
-    margin: 0 5px;
     border: none;
     border-bottom: 1px solid #000000;
     font-style: italic;
@@ -598,14 +597,26 @@ body {
 }
 .login-h1{
     text-align: center;
-    font-weight: 500;
+    font-weight: 300;
 }
 .login-form{
     display: flex;
+    padding: 10px;
+    box-sizing: border-box;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 20px 0;
+}
+.login-form-item-box{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.login-form-item-box label{
+    color: #959595;
+    font-weight: 700;
+    font-size: 12px;
 }
 .login-form-item{
     display: flex;
@@ -625,6 +636,7 @@ body {
     margin-bottom: 5px;
 }
 .login-form-submit{
+    cursor: pointer;
     border: 2px solid #e67429;
     background-color: #f68236;
     color: white;
@@ -647,6 +659,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 .account-h1{
     font-weight: 300;

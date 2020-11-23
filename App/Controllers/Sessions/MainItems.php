@@ -20,7 +20,7 @@ class MainItems
     public function getAllItems()
     {
         // 1. Подготавливаем запрос
-        $statement = $this->connection->prepare('SELECT * FROM images WHERE id>6');
+        $statement = $this->connection->prepare('SELECT * FROM images');
         // 2. Указываем тип данных
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         // 3. Отправляем запрос в БД

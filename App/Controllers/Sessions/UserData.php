@@ -16,6 +16,21 @@ class UserData
         session_start();
     }
 
+    public function insertUserData(?string $login = null, ?string $pass = null, ?string $name = null, ?string $surname = null, ?int $phone = null, ?string $email = null)
+    {
+        $query = "INSERT INTO users (`login`, `password`, `name`, `surname`, `phone_number`, `email`) VALUES (?, ?, ?, ?, ?, ?)";
+
+        $statement = $this->connection->prepare($query);
+
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        
+        $statement->execute([$login, $pass, $name, $surname, $phone, $email]);
+        
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+
     public function getUserData(?string $login = null, ?string $pass = null)
     {
         $query = "SELECT * FROM users WHERE login = ? AND password = ?";

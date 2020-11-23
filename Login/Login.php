@@ -1,5 +1,7 @@
 <?php
 
+    $configs = include($_SERVER['DOCUMENT_ROOT'] . '/config.php');  
+
     require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 
     use Controllers\Sessions\UserData;
@@ -48,7 +50,7 @@
         <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\header.php'); ?>
 
         <div class="fullscreen">
-            <h1 class="login-h1">вход в личный кабинет</h1>
+            <h1 class="login-h1">Вход в личный кабинет</h1>
             <form class="login-form" method="POST">
                 <div class="form-item">
                     <input class ="login-form-input" type="text" name="login" placeholder="Введите логин">

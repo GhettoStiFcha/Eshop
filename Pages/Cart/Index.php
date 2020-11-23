@@ -31,7 +31,7 @@ foreach($jo as $key => $value) {
     }
 }
 
-
+// print_r($catalog);
 
 ?>
 

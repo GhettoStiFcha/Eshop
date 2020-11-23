@@ -32,14 +32,22 @@
 <body>
     <div class="wrapper">
         <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\header.php'); ?>
-        <div class="account-box">
-            <h1 class="account-h1">Личный кабинет</h1>
-            <div class="hello">
-                Доброго времени суток, <?=$user['name']?>!
+        <div class="fullscreen">
+            <div class="account-box">
+                <h1 class="account-h1">Личный кабинет</h1>
+                <div class="account-hello">
+                    Доброго времени суток, <?=$user['name']?>!
+                </div>
+                <div class="account-phone">
+                    Ваш телефон: <?=$user['phone_number']?>
+                </div>
+                <div class="account-email">
+                    Ваш email: <?=$user['email']?>
+                </div>
+                <a href="/Login/Login.php" class="login-destroy-btn" onclick="sessionDestroy()">
+                    Выйти
+                </a>
             </div>
-            <a href="/Login/Login.php" class="login-destroy-btn" onclick="sessionDestroy()">
-                Выйти
-            </a>
         </div>
         <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\footer.php'); ?>
     </div>

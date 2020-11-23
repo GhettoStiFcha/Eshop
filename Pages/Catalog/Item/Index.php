@@ -16,7 +16,7 @@
         $filteredSizes[] = $size->getSizes($value['size_id']);
     }
 
-    print_r($_GET);
+    
 
 
 ?>

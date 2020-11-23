@@ -17,7 +17,7 @@ class UserCart implements CartInterface
         $itemNumber = 0;
         $_SESSION['item'] = isset($_SESSION['item']) ?  $_SESSION['item'] : [];
         foreach($_SESSION['item'] as $index => $value) {
-            if ($value['id'] === $id) {
+            if ($value['id'] === $id && $value['size_id'] === $size) {
                 $issetID = true;
                 $itemNumber = $index;
                 break;
