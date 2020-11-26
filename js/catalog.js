@@ -46,19 +46,32 @@ function regenerateSubCategories(subCategories) {
     insertDataIntoElement(optionAdd, '[name=subcategory]')
 }
 
+let strGET = window.location.search.replace('?', '');
 // button.onclick = () => {}
 // window.onload = () => {}
 window.addEventListener('load', () => {
-    let XHR = getData('/App/Controllers/Catalog/Catalog.php');
-    XHR.addEventListener('load', function () {
-        let data = JSON.parse(XHR.responseText);
-        // console.log(data);
-        let item = '';
-        data.forEach((value, index) => {
-            item += generateCard(value);
+    if (strGET != '') {
+        console.log(strGET);
+        let XHR = getData(`/App/Controllers/Catalog/Catalog.php?${strGET}`);
+        XHR.addEventListener('load', function () {
+            let data = JSON.parse(XHR.responseText);
+            let item = '';
+            data.items.forEach((value, index) => {
+                item += generateCard(value);
+            });
+            insertDataIntoElement(item, '.catalog');
         });
-        insertDataIntoElement(item, '.catalog');
-    });
+    } else {
+        let XHR = getData('/App/Controllers/Catalog/Catalog.php');
+        XHR.addEventListener('load', function () {
+            let data = JSON.parse(XHR.responseText);
+            let item = '';
+            data.forEach((value, index) => {
+                item += generateCard(value);
+            });
+            insertDataIntoElement(item, '.catalog');
+        });
+    }
 });
 
 catalog.price.addEventListener('change', () => {

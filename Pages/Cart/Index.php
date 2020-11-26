@@ -18,6 +18,9 @@ $catalog = new CatalogItems();
 
 $jo = $catalog->getItemsByMultipleIDs($cartItems);
 
+print_r($cartItems);
+print_r($jo);
+
 foreach($jo as $key => $value) { 
     $id = $value['id'];
     foreach($cart as $index => $cartAmount) {
@@ -31,7 +34,8 @@ foreach($jo as $key => $value) {
     }
 }
 
-// print_r($catalog);
+print_r($jo);
+print_r($_SESSION)
 
 ?>
 
@@ -74,11 +78,11 @@ foreach($jo as $key => $value) {
                             <div class="cart-item-amount-text" id="item-<?=$value['id']?>"><?=$value['amount']?></div>
                             <div class="cart-item-amount-button-box">
                                 <div class="cart-item-amount-button" onclick="addAmount(<?=$value['id']?>,<?=$value['size_id']?>)">+</div>
-                                <div class="cart-item-amount-button" onclick="removeAmount(<?=$value['id']?>)">-</div>
+                                <div class="cart-item-amount-button" onclick="removeAmount(<?=$value['id']?>,<?=$value['size_id']?>)">-</div>
                             </div>
                         </div>
                         <div class="cart-item-div cart-item-price w10"><?=$value['price']?> руб.</div>
-                        <div class="cart-item-div cart-item-delete w10" onclick="deleteItemFromCart(<?=$value['id']?>)"></div> 
+                        <div class="cart-item-div cart-item-delete w10" onclick="deleteItemFromCart(<?=$value['id']?>,<?=$value['size_id']?>)"></div> 
                     </div>
                 </div>
                 <?php endforeach; ?>

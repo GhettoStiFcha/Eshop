@@ -41,8 +41,8 @@ function removeItemFromCart(id) {
     });
 };
 
-function deleteItemFromCart(id) {
-    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&status=delete`);
+function deleteItemFromCart(id, size) {
+    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&size=${size}&status=delete`);
     XHR.addEventListener('load', function () {
         let data = JSON.parse(XHR.responseText);
         console.log(data);
@@ -58,8 +58,8 @@ function addAmount(id, size) {
     // let amount = addItemToCart(id);
 }
 
-function removeAmount(id) {
-    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&status=remove`);
+function removeAmount(id, size) {
+    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&size=${size}&status=remove`);
     XHR.addEventListener('load', function () {
         let data = JSON.parse(XHR.responseText);
         insertDataIntoElement(data, `#item-${id}`);

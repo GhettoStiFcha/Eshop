@@ -23,9 +23,9 @@
 <header class="header">
     <nav class="header-nav">
         <a class="header-logo" href="/pages/main"></a>
-        <a href="/pages/catalog" class="header-nav-a">Женщинам</a>
-        <a href="/pages/catalog" class="header-nav-a">Мужчинам</a>
-        <a href="/pages/catalog" class="header-nav-a">Детям</a>
+        <a href="/pages/catalog/?category=2&subcategory=&price=&productName=" class="header-nav-a">Женщинам</a>
+        <a href="/pages/catalog/?category=1&subcategory=&price=&productName=" class="header-nav-a">Мужчинам</a>
+        <a href="/pages/catalog/?category=3&subcategory=&price=&productName=" class="header-nav-a">Детям</a>
         <a href="/pages/catalog" class="header-nav-a">Новинки</a>
         <a href="#contacts" class="header-nav-a">О нас</a>
     </nav>

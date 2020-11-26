@@ -32,22 +32,24 @@
         </nav>
         <h1 class="default">Каталог товаров</h1>
         <form class="default catalog-form" id="catalog">
-            <select name="category">
-                <option hidden>Выберите категорию</option>
-                <?php foreach($rootCategories as $key => $value): ?>
-                    <option value="<?=$value['id']?>"><?=$value['category_name']?></option>
-                <?php endforeach;?>
-            </select>
-            <select name="subcategory">
-                <option hidden>Выберите подкатегорию</option>
-            </select>
-            <select name="price">
-                <option hidden>Выберите стоимость</option>
-                <option value="0-6000">0-6000</option>
-                <option value="6000-12000">6000-12000</option>
-                <option value="12000-17000">12000-17000</option>
-                <option value="17000-20000">17000-20000</option>
-            </select>
+            <div class="select-box">
+                <select name="category">
+                    <option hidden>Выберите категорию</option>
+                    <?php foreach($rootCategories as $key => $value): ?>
+                        <option value="<?=$value['id']?>"><?=$value['category_name']?></option>
+                    <?php endforeach;?>
+                </select>
+                <select name="subcategory">
+                    <option hidden>Выберите подкатегорию</option>
+                </select>
+                <select name="price">
+                    <option hidden>Выберите стоимость</option>
+                    <option value="0-6000">0-6000</option>
+                    <option value="6000-12000">6000-12000</option>
+                    <option value="12000-17000">12000-17000</option>
+                    <option value="17000-20000">17000-20000</option>
+                </select>
+            </div>
             <input name="productName" placeholder="Поиск"> 
         </form>
         <div class="catalog"></div>

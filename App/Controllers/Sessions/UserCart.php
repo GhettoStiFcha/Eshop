@@ -39,13 +39,13 @@ class UserCart implements CartInterface
         
     }
 
-    public function removeItem(int $id): int
+    public function removeItem(int $id, ?int $size): int
     {
         $issetID = false;
         $itemNumber = 0;
         $_SESSION['item'] = isset($_SESSION['item']) ?  $_SESSION['item'] : [];
         foreach($_SESSION['item'] as $index => $value) {
-            if ($value['id'] === $id) {
+            if ($value['id'] === $id && $value['size_id'] === $size) {
                 $issetID = true;
                 $itemNumber = $index;
                 break;
@@ -64,13 +64,13 @@ class UserCart implements CartInterface
         return $_SESSION['item'][$itemNumber]['amount'];
     }
 
-    public function deleteItem(int $id)
+    public function deleteItem(int $id, ?int $size)
     {
         $issetID = false;
         $itemNumber = 0;
         $_SESSION['item'] = isset($_SESSION['item']) ?  $_SESSION['item'] : [];
         foreach($_SESSION['item'] as $index => $value) {
-            if ($value['id'] === $id) {
+            if ($value['id'] === $id && $value['size_id'] === $size) {
                 $issetID = true;
                 $itemNumber = $index;
                 break;

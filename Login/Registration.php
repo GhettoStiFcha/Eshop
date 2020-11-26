@@ -3,11 +3,13 @@
     require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 
     use Controllers\Sessions\UserData;
+    use Controllers\Sessions\FormCleaner;
+
     $userData = new UserData();
+    $fClean = new FormCleaner();
 
     error_reporting(0);
-    $badLoginError = '';
-    $badPassError = '';
+    $dataError = '';
 
     session_start();
     if (!empty($_SESSION['user_id'])) {
@@ -22,16 +24,23 @@
         $phone = $_POST['phone'];
         $email = $_POST['email'];
 
-        $userData = new UserData();
         $user = $userData->getUserData($login, $pass);
-        
-        if ($_POST['pass'] === $_POST['pass-confirm']) {
-            $userData->insertUserData($login, $pass, $name, $surname, $phone, $email);
-            $_SESSION['user_id'] = $user['id'];
-            session_start();
-            header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
-        } else {
-            $dataError = 'Данные введены неверно.';
+
+        $cleanPass = $fClean->formClean($pass);
+        $cleanLogin = $fClean->formClean($login);
+        $cleanName = $fClean->formClean($name);
+        $cleanSurname = $fClean->formClean($surname);
+        $cleanPhone = $fClean->formClean($phone);
+        $cleanEmail = $fClean->formClean($email);
+
+        if(!empty($cleanLogin) && !empty($cleanPass) && !empty($cleanName) && !empty($cleanSurname) && !empty($cleanPhone) && !empty($cleanEmail) && ($_POST['pass'] === $_POST['pass-confirm'])) {
+            $email_validate = filter_var($email, FILTER_VALIDATE_EMAIL); 
+            if($fClean->lengthCheck($login, 1, 50) && $fClean->lengthCheck($name, 1, 30) && $fClean->lengthCheck($surname, 1, 50) && $fClean->lengthCheck($phone, 11, 14)) {
+                $userData->insertUserData($login, $pass, $name, $surname, $phone, $email);  
+                echo "<script type='text/javascript'>alert('Вы успешно зарегестрировались!');</script>";
+            } else {
+                $dataError = 'Данные введены неверно.';
+            }
         }
     }
 
@@ -80,7 +89,7 @@
                 <div class="login-form-item-box">
                     <label for="surname">Ваша фамилия:</label>
                     <div class="form-item">
-                        <input required pattern="[A-Za-zА-Яа-яЁё]{,30}" title="Не более чем 30 символов" class="login-form-input" type="text" name="surname" placeholder="Иванов">
+                        <input required pattern="[A-Za-zА-Яа-яЁё]{,50}" title="Не более чем 50 символов" class="login-form-input" type="text" name="surname" placeholder="Иванов">
                     </div>
                 </div>
                 <div class="login-form-item-box">
@@ -92,14 +101,14 @@
                 <div class="login-form-item-box">
                     <label for="phone">Ваш номер телефона:</label>
                     <div class="form-item">
-                        <input required pattern="[0-9]{11}" title="Номер телефона не должен содержать буквы или символы" class="login-form-input" type="tel" name="phone" placeholder="79993210011">
+                        <input required pattern="[0-9]{11, 14}" title="Номер телефона не должен содержать буквы или символы" class="login-form-input" type="tel" name="phone" placeholder="79993210011">
                     </div>
                 </div>
                 
                 <div class="form-item">
                     <input class ="login-form-submit" type="submit" value="Зарегистрироваться">
                 </div>
-                <?=$passError;?>
+                <?=$dataError;?>
             </form>
         </div>
 
