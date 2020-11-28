@@ -3,12 +3,15 @@
 
     use Controllers\Catalog\Categories;
     use Controllers\Catalog\CatalogItems;
+    use Controllers\Breadcrumbs\Breadcrumbs;
 
     $categories = new Categories();
     $items = new CatalogItems();
     $rootCategories = $categories->getRootCategories();
 
-    // print_r($rootCategories);
+    $br = new Breadcrumbs;
+    $br->AddStep('/Pages/Main', 'Главная');
+    $br->AddStep(null, 'Каталог');
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +29,7 @@
     <div class="wrapper">
         <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\header.php'); ?>
         <nav class="breadcrumbs">
-            <li class="breadcrumbs-item">
-                <a href="/pages/catalog" class="breadcrumbs-link">Каталог</a>
-            </li>
+            <?php $br->getHtml(); ?>
         </nav>
         <h1 class="default">Каталог товаров</h1>
         <form class="default catalog-form" id="catalog">

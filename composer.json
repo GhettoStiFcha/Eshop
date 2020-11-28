@@ -11,12 +11,8 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Contracts\\": "App/Contracts",
-            "Absract\\": "App/Absract",
             "Controllers\\": "App/Controllers",
-            "Traits\\": "App/Controllers/Traits",
-            "Database\\": "App/Database",
-            "Breadcrumbs\\": "App/Breadcrumbs"
+            "Database\\": "App/Database"
         }
     }
 }

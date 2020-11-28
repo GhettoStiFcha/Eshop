@@ -7,10 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInit5c8b165362c8a1a6135f7a1801d01183
 {
     public static $prefixLengthsPsr4 = array (
-        'T' => 
-        array (
-            'Traits\\' => 7,
-        ),
         'D' => 
         array (
             'Database\\' => 9,
@@ -18,23 +14,10 @@ class ComposerStaticInit5c8b165362c8a1a6135f7a1801d01183
         'C' => 
         array (
             'Controllers\\' => 12,
-            'Contracts\\' => 10,
-        ),
-        'B' => 
-        array (
-            'Breadcrumbs\\' => 12,
-        ),
-        'A' => 
-        array (
-            'Absract\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Traits\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Controllers/Traits',
-        ),
         'Database\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/Database',
@@ -42,18 +25,6 @@ class ComposerStaticInit5c8b165362c8a1a6135f7a1801d01183
         'Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/Controllers',
-        ),
-        'Contracts\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Contracts',
-        ),
-        'Breadcrumbs\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Breadcrumbs',
-        ),
-        'Absract\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Absract',
         ),
     );
 

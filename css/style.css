@@ -417,17 +417,9 @@ body {
 }
 .breadcrumbs{
     margin-bottom: 20px;
-}
-.breadcrumbs-item{
-    display: inline-block;
-}
-.breadcrumbs-item:not(:last-of-type)::after{
-    content: '/';
-    margin: 0 5px;
     color: #00000050;
 }
-
-.breadcrumbs-link{
+.breadcrumbs a{
     text-decoration: none;
     color: #00000050;
 }

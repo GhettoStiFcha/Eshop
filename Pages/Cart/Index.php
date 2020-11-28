@@ -6,7 +6,8 @@ require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 
 use Controllers\Sessions\UserCart;
 use Controllers\Catalog\CatalogItems;
-use Controllers\Catalog\Sizes;    
+use Controllers\Catalog\Sizes;
+use Controllers\Breadcrumbs\Breadcrumbs; 
 
 $item = new UserCart();
 $size = new Sizes();
@@ -17,12 +18,12 @@ $cartItems = $item->getItemsIDs();
 $catalog = new CatalogItems();
 
 $place_holders = implode(',', array_fill(0, count($cartItems), '?'));
-print_r($place_holders . '<br>');
+// print_r($place_holders . '<br>');
 
 $jo = $catalog->getItemsByMultipleIDs($cartItems);
 
-print_r($cartItems);
-print_r($jo);
+// print_r($cartItems);
+// print_r($jo);
 
 foreach($jo as $key => $value) { 
     $id = $value['id'];
@@ -37,8 +38,12 @@ foreach($jo as $key => $value) {
     }
 }
 
-print_r($jo);
-print_r($_SESSION)
+// print_r($jo);
+// print_r($_SESSION);
+
+$br = new Breadcrumbs;
+$br->AddStep('/Pages/Main', 'Главная');
+$br->AddStep(null, 'Корзина');
 
 ?>
 
@@ -54,6 +59,9 @@ print_r($_SESSION)
 <body>
     <div class="wrapper">
         <?php include('C:\xampp\htdocs\inc\header.php'); ?>
+        <nav class="breadcrumbs">
+            <?php $br->getHtml(); ?>
+        </nav>
         <h1 class="default cart-h1">ВАША КОРЗИНА</h1>
         <div class="cart-alert default">Товары резервируются на ограниченное время</div>
         <div class="cart-box">
@@ -90,10 +98,11 @@ print_r($_SESSION)
                 </div>
                 <?php endforeach; ?>
             <?php endif; ?>
-            
-            <?php include('C:\xampp\htdocs\inc\footer.php'); ?>
-            <script src="/js/addToCart.js"></script>
         </div>
+        <?php include('C:\xampp\htdocs\inc\footer.php'); ?>
     </div>
+
+
+    <script src="/js/addToCart.js"></script>
 </body>
 </html>

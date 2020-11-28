@@ -4,6 +4,7 @@
 
     use Controllers\Catalog\CatalogItems;
     use Controllers\Catalog\Sizes;
+    use Controllers\Breadcrumbs\Breadcrumbs;
 
     $catalog = new CatalogItems();
     $item = $catalog->getItem($_GET['id']);
@@ -16,7 +17,10 @@
         $filteredSizes[] = $size->getSizes($value['size_id']);
     }
 
-    
+    $br = new Breadcrumbs;
+    $br->AddStep('/Pages/Main', 'Главная');
+    $br->AddStep('/Pages/Catalog', 'Каталог');
+    $br->AddStep(null, $item['name']);
 
 
 ?>
@@ -35,15 +39,7 @@
     <div class="wrapper">
         <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\header.php'); ?>
         <nav class="breadcrumbs">
-            <li class="breadcrumbs-item">
-                <a href="/pages/catalog" class="breadcrumbs-link">Каталог</a>
-            </li>
-            <li class="breadcrumbs-item">
-                <a href="" class="breadcrumbs-link">Мужчинам</a>
-            </li>
-            <li class="breadcrumbs-item">
-                <a href="" class="breadcrumbs-link"><?=$item['name']?></a>
-            </li>
+            <?php $br->getHtml(); ?>
         </nav>
         <section class="item">
             <div class="item-image" style="background-image: url(<?=$item['image_url']?>)"></div>

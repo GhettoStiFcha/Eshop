@@ -8,7 +8,7 @@ class Breadcrumbs implements BreadcrumbsInterface
 {
        
     public $steps = array(); // Элементы breadcrumbs
-    public $sep = ' &raquo; '; // Разделитель ссылок
+    public $sep = ' / '; // Разделитель ссылок
 
     // Метод для добавления нового элемента
     public function addStep($link, $title)
