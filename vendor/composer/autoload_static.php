@@ -20,6 +20,10 @@ class ComposerStaticInit5c8b165362c8a1a6135f7a1801d01183
             'Controllers\\' => 12,
             'Contracts\\' => 10,
         ),
+        'B' => 
+        array (
+            'Breadcrumbs\\' => 12,
+        ),
         'A' => 
         array (
             'Absract\\' => 8,
@@ -42,6 +46,10 @@ class ComposerStaticInit5c8b165362c8a1a6135f7a1801d01183
         'Contracts\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/Contracts',
+        ),
+        'Breadcrumbs\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Breadcrumbs',
         ),
         'Absract\\' => 
         array (

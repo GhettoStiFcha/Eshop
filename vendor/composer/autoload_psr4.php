@@ -10,5 +10,6 @@ return array(
     'Database\\' => array($baseDir . '/App/Database'),
     'Controllers\\' => array($baseDir . '/App/Controllers'),
     'Contracts\\' => array($baseDir . '/App/Contracts'),
+    'Breadcrumbs\\' => array($baseDir . '/App/Breadcrumbs'),
     'Absract\\' => array($baseDir . '/App/Absract'),
 );

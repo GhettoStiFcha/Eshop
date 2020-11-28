@@ -60,8 +60,8 @@
                         <?php endforeach;?>
                     <?php endforeach;?> 
                 </select>
-                <div id="addButton" class="btn cart-btn" onclick="addItemToCart(`<?=$item['id']?>`);">Добавить в корзину</div>
-                <input type="submit" value="Удалить из корзины" class="btn cart-btn" onclick="removeItemFromCart(<?=$item['id']?>)">
+                <div id="addButton" class="btn cart-btn" onclick="addItemToCart(<?=$item['id']?>);">Добавить в корзину</div>
+                <div id="removeButton" class="btn cart-btn" onclick="removeItemFromCart(<?=$item['id']?>)">Удалить из корзины</div>
             </form>
         </section>
             

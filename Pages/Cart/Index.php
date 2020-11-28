@@ -16,6 +16,9 @@ $cartItems = $item->getItemsIDs();
 
 $catalog = new CatalogItems();
 
+$place_holders = implode(',', array_fill(0, count($cartItems), '?'));
+print_r($place_holders . '<br>');
+
 $jo = $catalog->getItemsByMultipleIDs($cartItems);
 
 print_r($cartItems);

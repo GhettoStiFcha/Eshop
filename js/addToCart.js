@@ -14,38 +14,43 @@ function getFormData(formName) {
     let form = document.forms[formName];
     let stringParameters = '';
     let convertedValues = ['Выберите размер'];
-    console.log(form);
     for (let i = 0; i < form.length; i++) {
         let convertedValue = form[i].value;
         if (convertedValues.includes(form[i].value)) convertedValue = '';
         stringParameters += `&${form[i].name}=${convertedValue}`;
     }
     stringParameters = stringParameters.slice(1);
-    console.log(stringParameters);
     return stringParameters
 }
 
 function addItemToCart(id) {
     let allParameters = getFormData('itemSizes');
-    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&${allParameters}&status=add`);
-    XHR.addEventListener('load', function () {
-        let data = JSON.parse(XHR.responseText);
-    });
+    if (allParameters !== 'size=') {
+        let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&${allParameters}&status=add`);
+        XHR.addEventListener('load', function () {
+            let data = JSON.parse(XHR.responseText);
+        });
+    } else {
+        alert('Выберите размер!');
+    }
 };
 
 function removeItemFromCart(id) {
-    let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&status=remove`);
-    XHR.addEventListener('load', function () {
-        let data = JSON.parse(XHR.responseText);
-        console.log(data);
-    });
+    let allParameters = getFormData('itemSizes');
+    if (allParameters !== 'size=') {
+        let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&${allParameters}&status=remove`);
+        XHR.addEventListener('load', function () {
+            let data = JSON.parse(XHR.responseText);
+        });
+    } else {
+        alert('Выберите размер!');
+    }
 };
 
 function deleteItemFromCart(id, size) {
     let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&size=${size}&status=delete`);
     XHR.addEventListener('load', function () {
         let data = JSON.parse(XHR.responseText);
-        console.log(data);
     });
 };
 

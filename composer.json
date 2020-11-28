@@ -15,7 +15,8 @@
             "Absract\\": "App/Absract",
             "Controllers\\": "App/Controllers",
             "Traits\\": "App/Controllers/Traits",
-            "Database\\": "App/Database"
+            "Database\\": "App/Database",
+            "Breadcrumbs\\": "App/Breadcrumbs"
         }
     }
 }
