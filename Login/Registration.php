@@ -26,16 +26,16 @@
 
         $user = $userData->getUserData($login, $pass);
 
-        $cleanPass = $fClean->formClean($pass);
-        $cleanLogin = $fClean->formClean($login);
-        $cleanName = $fClean->formClean($name);
-        $cleanSurname = $fClean->formClean($surname);
-        $cleanPhone = $fClean->formClean($phone);
-        $cleanEmail = $fClean->formClean($email);
+        $pass = $fClean->formClean($pass);
+        $lLogin = $fClean->formClean($login);
+        $name = $fClean->formClean($name);
+        $surname = $fClean->formClean($surname);
+        $phone = $fClean->formClean($phone);
+        $email = $fClean->formClean($email);
 
-        if(!empty($cleanLogin) && !empty($cleanPass) && !empty($cleanName) && !empty($cleanSurname) && !empty($cleanPhone) && !empty($cleanEmail) && ($_POST['pass'] === $_POST['pass-confirm'])) {
-            $email_validate = filter_var($email, FILTER_VALIDATE_EMAIL); 
-            if($fClean->lengthCheck($login, 1, 50) && $fClean->lengthCheck($name, 1, 30) && $fClean->lengthCheck($surname, 1, 50) && $fClean->lengthCheck($phone, 11, 14)) {
+        if(!empty($login) && !empty($pass) && !empty($name) && !empty($surname) && !empty($phone) && !empty($email) && ($_POST['pass'] === $_POST['pass-confirm'])) {
+            $email_validate = filter_var($cleanEmail, FILTER_VALIDATE_EMAIL); 
+            if($fClean->lengthCheck($login, 1, 50) && $fClean->lengthCheck($name, 1, 30) && $fClean->lengthCheck($surname, 1, 50) && $fClean->lengthCheck($phone, 11, 14) && $email_validate) {
                 $userData->insertUserData($login, $pass, $name, $surname, $phone, $email);  
                 echo "<script type='text/javascript'>alert('Вы успешно зарегестрировались!');</script>";
             } else {

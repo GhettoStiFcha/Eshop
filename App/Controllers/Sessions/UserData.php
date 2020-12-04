@@ -31,6 +31,21 @@ class UserData
         return $result;
     }
 
+    public function insertUserEmail(?string $email = null)
+    {
+        $query = "INSERT INTO email (`email`) VALUES (?)";
+
+        $statement = $this->connection->prepare($query);
+
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        
+        $statement->execute([$email]);
+        
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+
     public function getUserData(?string $login = null, ?string $pass = null)
     {
         $query = "SELECT * FROM users WHERE login = ? AND password = ?";
