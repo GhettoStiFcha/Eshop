@@ -78,7 +78,9 @@ class UserCart implements CartInterface
         }
         if ($issetID) {
             unset($_SESSION['item'][$itemNumber]);
+            return true;
         }
+        return false;
     }
 
     public function getItem(int $id): array

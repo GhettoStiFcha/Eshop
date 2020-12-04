@@ -3,6 +3,10 @@ function insertDataIntoElement(text, element) {
     resultElement.innerHTML = text;
 };
 
+function deleteElementFromDOM(element) {
+    element.remove();
+}
+
 function getData(file) {
     let XHR = new XMLHttpRequest;
     XHR.open('GET', file);
@@ -51,6 +55,9 @@ function deleteItemFromCart(id, size) {
     let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&size=${size}&status=delete`);
     XHR.addEventListener('load', function () {
         let data = JSON.parse(XHR.responseText);
+        if (data) {
+            deleteElementFromDOM(document.querySelector(`[data-productId='${id}']`));
+        }
     });
 };
 
@@ -70,12 +77,4 @@ function removeAmount(id, size) {
         insertDataIntoElement(data, `#item-${id}`);
     });
 }
-
-// function deleteAmount(id) {
-//     let XHR = getData(`/App/Controllers/Sessions/Cart.php?id=${id}&status=delete`);
-//     XHR.addEventListener('load', function () {
-//         let data = JSON.parse(XHR.responseText);
-//         this.document.getElementById(`#item-${id}`).style.display = 'none';
-//     });
-// }
 

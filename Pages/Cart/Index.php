@@ -17,29 +17,35 @@ $cartItems = $item->getItemsIDs();
 
 $catalog = new CatalogItems();
 
-$place_holders = implode(',', array_fill(0, count($cartItems), '?'));
-// print_r($place_holders . '<br>');
 
-$jo = $catalog->getItemsByMultipleIDs($cartItems);
 
-// print_r($cartItems);
-// print_r($jo);
+$uniqueArray = array_unique($cartItems);
 
+if (count($cartItems) != count($uniqueArray)) {
+    foreach($cartItems as $key => $value) {
+        $jo[] = $catalog->getItem($value);
+    }
+} else {
+    $jo = $catalog->getItemsByMultipleIDs($cartItems);
+}
+
+// print_r($cart);
 foreach($jo as $key => $value) { 
     $id = $value['id'];
+    // print_r($value);
     foreach($cart as $index => $cartAmount) {
+        // print_r($cartAmount);
         $filteredSize = $size->getSizes($cartAmount['size_id']);
         if ((int)$id === (int)$cartAmount['id']) {
             $jo[$key]['amount'] = $cartAmount['amount'];
             $jo[$key]['size'] = $filteredSize[0]['size'];
             $jo[$key]['size_id'] = $cartAmount['size_id'];
+            unset($cart[$index]);
             break;
         }
     }
 }
 
-// print_r($jo);
-// print_r($_SESSION);
 
 $br = new Breadcrumbs;
 $br->AddStep('/Pages/Main', 'Главная');
@@ -78,7 +84,7 @@ $br->AddStep(null, 'Корзина');
             <?php else: ?>
                 <?php foreach($jo as $key => $value): ?>
                 <div>
-                    <div class="cart-item" id="cartItem">
+                    <div class="cart-item" id="cartItem" data-productId="<?=$value['id']?>">
                         <div class="cart-item-div cart-item-pic" style="background-image: url(<?=$value['image_url']?>)"></div>
                         <div class="cart-item-div cart-item-text">
                             <div class="cart-item-div cart-item-name"><?=$value['name']?></div>

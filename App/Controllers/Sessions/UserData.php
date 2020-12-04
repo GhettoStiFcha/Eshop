@@ -9,6 +9,7 @@ class UserData
 {
     private $db;
     private $connection;
+    private $lastInsertId;
 
     public function __construct()
     {
@@ -24,9 +25,9 @@ class UserData
 
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         
-        $statement->execute([$login, $pass, $name, $surname, $phone, $email]);
-        
-        $result = $statement->fetchAll();
+        $result = $statement->execute([$login, $pass, $name, $surname, $phone, $email]);
+
+        $this->lastInsertId = $this->connection->lastInsertId();
 
         return $result;
     }
@@ -74,6 +75,11 @@ class UserData
         $result = $statement->fetch();
 
         return $result;
+    }
+
+    public function lastInsertId()
+    {
+        return $this->lastInsertId;
     }
 }
 

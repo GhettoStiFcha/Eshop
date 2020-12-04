@@ -7,6 +7,8 @@
 
     $userData = new UserData();
     $fClean = new FormCleaner();
+    
+    print_r($userData->lastInsertId());
 
     error_reporting(0);
     $dataError = '';
@@ -34,10 +36,17 @@
         $email = $fClean->formClean($email);
 
         if(!empty($login) && !empty($pass) && !empty($name) && !empty($surname) && !empty($phone) && !empty($email) && ($_POST['pass'] === $_POST['pass-confirm'])) {
-            $email_validate = filter_var($cleanEmail, FILTER_VALIDATE_EMAIL); 
+            $email_validate = filter_var($email, FILTER_VALIDATE_EMAIL); 
             if($fClean->lengthCheck($login, 1, 50) && $fClean->lengthCheck($name, 1, 30) && $fClean->lengthCheck($surname, 1, 50) && $fClean->lengthCheck($phone, 11, 14) && $email_validate) {
-                $userData->insertUserData($login, $pass, $name, $surname, $phone, $email);  
-                echo "<script type='text/javascript'>alert('Вы успешно зарегестрировались!');</script>";
+                $registration = $userData->insertUserData($login, $pass, $name, $surname, $phone, $email);
+                if ($registration) {
+                    
+                    session_start();
+                    $_SESSION['user_id'] = $userData->lastInsertId();
+                    header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
+                } else {
+                    echo "<script type='text/javascript'>console.log('Упс... Произошла какая-то ошибка. Попробуйте снова!');</script>";
+                }
             } else {
                 $dataError = 'Данные введены неверно.';
             }
