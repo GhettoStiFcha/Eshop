@@ -10,7 +10,7 @@ $item = new CatalogItems();
 $categories = new Categories();
 
 
-if (!empty($_GET) && ($_GET['category'] != '')) {
+if (!empty($_GET) && ($_GET['category'] !== '') && ($_GET['subcategory'] === '')) {
     echo json_encode(
             [
                 'items' => $item->getItemsByAllParameters(
@@ -23,6 +23,55 @@ if (!empty($_GET) && ($_GET['category'] != '')) {
             ]
         );
 
+} else if (!empty($_GET) && ($_GET['category'] !== '') && ($_GET['subcategory'] !== '') && ($_GET['price'] === '') && ($_GET['productName'] === '')) {
+    echo json_encode(
+        [
+            'items' => $item->getItemsBySubcategory($_GET['subcategory']),
+
+            'category' => $item->searchCategory($_GET['category'])
+        ]
+    );
+
+} else if (!empty($_GET) && ($_GET['category'] !== '') && ($_GET['subcategory'] !== '') && ($_GET['price'] !== '') && ($_GET['productName'] !== '')) {
+    echo json_encode(
+        [
+            'items' => $item->getItemsByAllParametersSub(
+                $_GET['price'],
+                $_GET['productName'],
+                $_GET['category'],
+                $_GET['subcategory']
+            ),
+
+            'category' => $item->searchCategory($_GET['category'])
+        ]
+    );
+
+} else if (!empty($_GET) && ($_GET['category'] !== '') && ($_GET['subcategory'] !== '') && ($_GET['price'] !== '') && ($_GET['productName'] === '')) {
+    echo json_encode(
+        [
+            'items' => $item->getItemsByNonameParametersSub(
+                $_GET['price'],
+                $_GET['category'],
+                $_GET['subcategory']
+            ),
+
+            'category' => $item->searchCategory($_GET['category'])
+        ]
+    );
+
+} else if (!empty($_GET) && ($_GET['category'] !== '') && ($_GET['subcategory'] !== '') && ($_GET['price'] === '') && ($_GET['productName'] !== '')) {
+    echo json_encode(
+        [
+            'items' => $item->getItemsByNopriceParametersSub(
+                $_GET['productName'],
+                $_GET['category'],
+                $_GET['subcategory']
+            ),
+
+            'category' => $item->searchCategory($_GET['category'])
+        ]
+    );
+
 } else if (!empty($_GET) && ($_GET['category'] === '') && ($_GET['price'] !== '') && ($_GET['productName'] === '')) {
     $price = explode('-', $_GET['price']);
     echo json_encode(
@@ -34,6 +83,7 @@ if (!empty($_GET) && ($_GET['category'] != '')) {
             'category' => $item->searchCategory($_GET['category'])
         ]
     );
+
 } else if (!empty($_GET) && ($_GET['category'] === '') && ($_GET['price'] === '')) {
     echo json_encode(
         [
@@ -44,6 +94,7 @@ if (!empty($_GET) && ($_GET['category'] != '')) {
             'category' => $item->searchCategory($_GET['category'])
         ]
     );
+
 } else if (!empty($_GET) && ($_GET['price'] !== '') && ($_GET['productName'] !== '')) {
     echo json_encode(
         [
@@ -55,6 +106,7 @@ if (!empty($_GET) && ($_GET['category'] != '')) {
             'category' => $item->searchCategory($_GET['category'])
         ]
     );
+
 } else if (isset ($_GET['from']) && isset($_GET['to']) ) {
     echo json_encode($item->getRangeItems($_GET['from'], $_GET['to']));
     

@@ -135,6 +135,21 @@ class CatalogItems
         return $result;
     }
 
+    public function getItemsBySubcategory(int $subcategory)
+    {
+        $query = "SELECT * FROM catalog WHERE category_id = ?";
+        // 1. Подготавливаем запрос
+        $statement = $this->connection->prepare($query);
+        // 2. Указываем тип данных
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        // 3. Отправляем запрос в БД
+        $statement->execute([$subcategory]);
+        // 4. Указываем что сделать с данными после получения запроса
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+
     public function getItemsByCoupleParameters(string $price, string $name): array
     {
         $parametersArray = [];
@@ -213,6 +228,148 @@ class CatalogItems
         $catalogString = "AND category_id IN ($place_holders)";
 
         $query = "SELECT * FROM catalog WHERE $priceString $nameString $catalogString";
+        // 1. Подготавливаем запрос
+        $statement = $this->connection->prepare($query);
+        // 2. Указываем тип данных
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        // 3. Отправляем запрос в БД
+        $statement->execute($parametersArray);
+        // 4. Указываем что сделать с данными после получения запроса
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+
+    public function getItemsByNonameParametersSub(string $price, int $category, int $subcategory): array
+    {
+        $parametersArray = [];
+
+        if  ($price !== '') {
+            $priceArray = explode('-', $price);
+            array_unshift($parametersArray, $priceArray[0], $priceArray[1]);
+        }
+
+        $priceString = ($price !== '') ? '(price BETWEEN ? AND ?)' : 'price > 0';
+
+        $categorySearch = $this->searchCategory($category);
+        $categoryArray = [];
+        if (!empty($categorySearch)) {
+            foreach($categorySearch as $key => $value) {
+                array_push($categoryArray, $value['id']);
+            }
+            $category = $categoryArray;
+        } else {
+            array_push($categoryArray, $category);
+            $category = $categoryArray;
+        }
+
+        $subcategoryString = "AND category_id = $subcategory";
+
+        $parametersArray = array_merge($parametersArray, $category);
+
+        $place_holders = implode(',', array_fill(0, count($category), '?'));
+        $catalogString = "AND category_id IN ($place_holders)";
+
+        $query = "SELECT * FROM catalog WHERE $priceString $catalogString $subcategoryString";
+        // 1. Подготавливаем запрос
+        $statement = $this->connection->prepare($query);
+        // 2. Указываем тип данных
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        // 3. Отправляем запрос в БД
+        $statement->execute($parametersArray);
+        // 4. Указываем что сделать с данными после получения запроса
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+
+    public function getItemsByNopriceParametersSub(string $name, int $category, int $subcategory): array
+    {
+        $parametersArray = [];
+
+        $insertString = "%$name%";
+
+        if ($name !== '') {
+            $nameString = 'name LIKE ?';
+            array_push($parametersArray, $insertString);
+        } else {
+            $nameString = '';
+        };
+        // $nameString = ($name !== '') ? 'AND name LIKE ?' : '';
+
+        $categorySearch = $this->searchCategory($category);
+        $categoryArray = [];
+        if (!empty($categorySearch)) {
+            foreach($categorySearch as $key => $value) {
+                array_push($categoryArray, $value['id']);
+            }
+            $category = $categoryArray;
+        } else {
+            array_push($categoryArray, $category);
+            $category = $categoryArray;
+        }
+
+        $subcategoryString = "AND category_id = $subcategory";
+
+        $parametersArray = array_merge($parametersArray, $category);
+
+        $place_holders = implode(',', array_fill(0, count($category), '?'));
+        $catalogString = "AND category_id IN ($place_holders)";
+
+        $query = "SELECT * FROM catalog WHERE $nameString $catalogString $subcategoryString";
+        // 1. Подготавливаем запрос
+        $statement = $this->connection->prepare($query);
+        // 2. Указываем тип данных
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        // 3. Отправляем запрос в БД
+        $statement->execute($parametersArray);
+        // 4. Указываем что сделать с данными после получения запроса
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+
+    public function getItemsByAllParametersSub(string $price, string $name, int $category, int $subcategory): array
+    {
+        $parametersArray = [];
+
+        $insertString = "%$name%";
+
+        if  ($price !== '') {
+            $priceArray = explode('-', $price);
+            array_unshift($parametersArray, $priceArray[0], $priceArray[1]);
+        }
+
+        $priceString = ($price !== '') ? '(price BETWEEN ? AND ?)' : 'price > 0';
+
+        if ($name !== '') {
+            $nameString = 'AND name LIKE ?';
+            array_push($parametersArray, $insertString);
+        } else {
+            $nameString = '';
+        };
+        // $nameString = ($name !== '') ? 'AND name LIKE ?' : '';
+
+        $categorySearch = $this->searchCategory($category);
+        $categoryArray = [];
+        if (!empty($categorySearch)) {
+            foreach($categorySearch as $key => $value) {
+                array_push($categoryArray, $value['id']);
+            }
+            $category = $categoryArray;
+        } else {
+            array_push($categoryArray, $category);
+            $category = $categoryArray;
+        }
+
+        $subcategoryString = "AND category_id = $subcategory";
+
+        $parametersArray = array_merge($parametersArray, $category);
+
+        $place_holders = implode(',', array_fill(0, count($category), '?'));
+        $catalogString = "AND category_id IN ($place_holders)";
+
+        $query = "SELECT * FROM catalog WHERE $priceString $nameString $catalogString $subcategoryString";
         // 1. Подготавливаем запрос
         $statement = $this->connection->prepare($query);
         // 2. Указываем тип данных
