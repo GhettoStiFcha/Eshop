@@ -4,9 +4,11 @@
 
     use Controllers\Sessions\UserData;
     use Controllers\Sessions\FormCleaner;
+    use Controllers\Sessions\Register;
 
     $userData = new UserData();
     $fClean = new FormCleaner();
+    $register = new Register();
     
     print_r($userData->lastInsertId());
 
@@ -19,6 +21,7 @@
     }
 
     if(!empty($_POST)) {
+
         $pass = md5(md5($_POST['pass']));
         $login = $_POST['login'];
         $name = $_POST['name'];
@@ -26,26 +29,18 @@
         $phone = $_POST['phone'];
         $email = $_POST['email'];
 
-        $user = $userData->getUserData($login, $pass);
-
-        $pass = $fClean->formClean($pass);
-        $lLogin = $fClean->formClean($login);
-        $name = $fClean->formClean($name);
-        $surname = $fClean->formClean($surname);
-        $phone = $fClean->formClean($phone);
-        $email = $fClean->formClean($email);
+        $userData->cleaner($pass, $login, $name, $surname, $phone, $email);
 
         if(!empty($login) && !empty($pass) && !empty($name) && !empty($surname) && !empty($phone) && !empty($email) && ($_POST['pass'] === $_POST['pass-confirm'])) {
             $email_validate = filter_var($email, FILTER_VALIDATE_EMAIL); 
             if($fClean->lengthCheck($login, 1, 50) && $fClean->lengthCheck($name, 1, 30) && $fClean->lengthCheck($surname, 1, 50) && $fClean->lengthCheck($phone, 11, 14) && $email_validate) {
                 $registration = $userData->insertUserData($login, $pass, $name, $surname, $phone, $email);
-                if ($registration) {
-                    
+                if ($registration) { 
                     session_start();
                     $_SESSION['user_id'] = $userData->lastInsertId();
                     header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
                 } else {
-                    echo "<script type='text/javascript'>console.log('Упс... Произошла какая-то ошибка. Попробуйте снова!');</script>";
+                    $dataError = 'Упс... Произошла какая-то ошибка. Попробуйте снова!';
                 }
             } else {
                 $dataError = 'Данные введены неверно.';
