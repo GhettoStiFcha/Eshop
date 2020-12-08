@@ -1,17 +1,31 @@
+<?php
+    require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
+
+    use Controllers\Sessions\MainItems;
+
+    $main = new MainItems();
+
+    $men = count($main->getItemsFromCatalog(1));
+    $women = count($main->getItemsFromCatalog(2));
+    $children = count($main->getItemsFromCatalog(3));
+    $all = $men + $women + $children;
+
+?>
+
 <footer class="footer" id="contacts">
     <div class="footer-lside">
         <h2 class="footer-side-head">КОЛЛЕКЦИИ</h2>    
         <p class="footer-side-text">
-            <a href="/pages/catalog/?category=2&subcategory=&price=&productName=">Женщинам (1725)</a>
+            <a href="/pages/catalog/?category=2&subcategory=&price=&productName=">Женщинам (<?=$women?>)</a>
         </p>
         <p class="footer-side-text">
-            <a href="/pages/catalog/?category=1&subcategory=&price=&productName=">Мужчинам (1870)</a>
+            <a href="/pages/catalog/?category=1&subcategory=&price=&productName=">Мужчинам (<?=$men?>)</a>
         </p>
         <p class="footer-side-text">
-            <a href="/pages/catalog/?category=3&subcategory=&price=&productName=">Детям (356)</a>
+            <a href="/pages/catalog/?category=3&subcategory=&price=&productName=">Детям (<?=$children?>)</a>
         </p>
         <p class="footer-side-text">
-            <a href="/pages/catalog/">Новинки (3012)</a>
+            <a href="/pages/catalog/">Новинки (<?=$all?>)</a>
         </p>
     </div>
     <nav class="footer-box">
