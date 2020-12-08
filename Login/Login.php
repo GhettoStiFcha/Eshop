@@ -23,14 +23,12 @@
         if (!empty($user)) {
             $_SESSION['user_id'] = $user['id'];
             session_start();
-            // print_r($_SESSION);
             header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
         } else {
             $loginError =  'Неверные имя пользователя или пароль.';
         }
     }
 
-    // print_r($_SESSION);
 ?>
 
 

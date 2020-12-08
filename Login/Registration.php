@@ -4,11 +4,9 @@
 
     use Controllers\Sessions\UserData;
     use Controllers\Sessions\FormCleaner;
-    use Controllers\Sessions\Register;
 
     $userData = new UserData();
     $fClean = new FormCleaner();
-    $register = new Register();
     
     print_r($userData->lastInsertId());
 
@@ -29,11 +27,11 @@
         $phone = $_POST['phone'];
         $email = $_POST['email'];
 
-        $userData->cleaner($pass, $login, $name, $surname, $phone, $email);
+        $result = $fClean->cleaner($pass, $login, $name, $surname, $phone, $email);
 
         if(!empty($login) && !empty($pass) && !empty($name) && !empty($surname) && !empty($phone) && !empty($email) && ($_POST['pass'] === $_POST['pass-confirm'])) {
             $email_validate = filter_var($email, FILTER_VALIDATE_EMAIL); 
-            if($fClean->lengthCheck($login, 1, 50) && $fClean->lengthCheck($name, 1, 30) && $fClean->lengthCheck($surname, 1, 50) && $fClean->lengthCheck($phone, 11, 14) && $email_validate) {
+            if($fClean->cleanCheck($login, $name, $surname, $phone) && $email_validate) {
                 $registration = $userData->insertUserData($login, $pass, $name, $surname, $phone, $email);
                 if ($registration) { 
                     session_start();
