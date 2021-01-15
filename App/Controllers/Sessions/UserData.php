@@ -32,6 +32,16 @@ class UserData
         return $result;
     }
 
+    public function isLoginUnique(?string $login = null)
+    {
+        $query = "SELECT * FROM users WHERE login = ?";
+        $statement = $this->connection->prepare($query);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute([$login]);
+        $result = $statement->fetch();
+        return $result;
+    }
+
     public function insertUserEmail(?string $email = null)
     {
         $query = "INSERT INTO email (`email`) VALUES (?)";

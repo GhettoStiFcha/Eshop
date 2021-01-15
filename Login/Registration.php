@@ -28,24 +28,28 @@
         $email = $_POST['email'];
 
         $result = $fClean->cleaner($pass, $login, $name, $surname, $phone, $email);
+        $unique = $userData->isLoginUnique($result['login']);
 
-        if(!empty($login) && !empty($pass) && !empty($name) && !empty($surname) && !empty($phone) && !empty($email) && ($_POST['pass'] === $_POST['pass-confirm'])) {
-            $email_validate = filter_var($email, FILTER_VALIDATE_EMAIL); 
-            if($fClean->cleanCheck($login, $name, $surname, $phone) && $email_validate) {
-                $registration = $userData->insertUserData($login, $pass, $name, $surname, $phone, $email);
-                if ($registration) { 
-                    session_start();
-                    $_SESSION['user_id'] = $userData->lastInsertId();
-                    header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
+        if(!empty($result) && ($_POST['pass'] === $_POST['pass-confirm'])) {
+            $email_validate = filter_var($result['email'], FILTER_VALIDATE_EMAIL); 
+            if(empty($unique)){
+                if($fClean->cleanCheck($result['login'], $result['name'], $result['surname'], $result['phone']) && $email_validate) {
+                    $registration = $userData->insertUserData($result['login'], $result['pass'], $result['name'], $result['surname'], $result['phone'], $result['email']);
+                    if ($registration) { 
+                        session_start();
+                        $_SESSION['user_id'] = $userData->lastInsertId();
+                        header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
+                    } else {
+                        $dataError = 'Упс... Произошла какая-то ошибка. Попробуйте снова!';
+                    }
                 } else {
-                    $dataError = 'Упс... Произошла какая-то ошибка. Попробуйте снова!';
+                    $dataError = 'Данные введены неверно.';
                 }
             } else {
-                $dataError = 'Данные введены неверно.';
+                $dataError = 'Данный логин уже занят. Попробуйте другой!';
             }
         }
     }
-
 ?>
 
 
