@@ -17,35 +17,41 @@ class MainItems
 
     }
 
+    /**
+     * Получение всех изображений для главной страницы
+     * @returns array массив ссылок на изображения
+     */
     public function getAllItems(): array
     {
-        // 1. Подготавливаем запрос
         $statement = $this->connection->prepare('SELECT * FROM images');
-        // 2. Указываем тип данных
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        // 3. Отправляем запрос в БД
         $statement->execute();
-        // 4. Указываем что сделать с данными после получения запроса
         $result = $statement->fetchAll();
 
         return $result;
     }
 
+    /**
+     * Поиск подкатегорий, относящихся к родительской категории товара
+     * @param $category категория-родитель
+     * @return array массив категорий
+     */
     public function searchCategory($category)
     {
         $query = "SELECT * FROM categories WHERE parent_id = ?";
-        // 1. Подготавливаем запрос
         $statement = $this->connection->prepare($query);
-        // 2. Указываем тип данных
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        // 3. Отправляем запрос в БД
         $statement->execute([$category]);
-        // 4. Указываем что сделать с данными после получения запроса
         $result = $statement->fetchAll();
 
         return $result;
     }
 
+    /**
+     * Получение всех товаров категории-родителя
+     * @param $category категория-родитель
+     * @return array массив идентификаторов товаров
+     */
     public function getItemsFromCatalog($category): array
     {
         $categorySearch = $this->searchCategory($category);
@@ -66,13 +72,9 @@ class MainItems
         $catalogString = "category_id IN ($place_holders)";
 
         $query = "SELECT id FROM catalog WHERE $catalogString";
-        // 1. Подготавливаем запрос
         $statement = $this->connection->prepare($query);
-        // 2. Указываем тип данных
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        // 3. Отправляем запрос в БД
         $statement->execute($category);
-        // 4. Указываем что сделать с данными после получения запроса
         $result = $statement->fetchAll();
 
         return $result;

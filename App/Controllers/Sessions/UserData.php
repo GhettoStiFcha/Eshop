@@ -17,6 +17,16 @@ class UserData
         session_start();
     }
 
+    /**
+     * Запись данных пользователя в базу данных (регистрация)
+     * @param string $login логин пользователя
+     * @param string $pass пароль пользователя
+     * @param string $name имя пользователя
+     * @param string $surname фамилия пользователя
+     * @param string $phone телефон пользователя
+     * @param string $email адрес электронной почты пользователя
+     * @return array массив с данными пользователя
+     */
     public function insertUserData(?string $login = null, ?string $pass = null, ?string $name = null, ?string $surname = null, ?int $phone = null, ?string $email = null)
     {
         $query = "INSERT INTO users (`login`, `password`, `name`, `surname`, `phone_number`, `email`) VALUES (?, ?, ?, ?, ?, ?)";
@@ -32,6 +42,11 @@ class UserData
         return $result;
     }
 
+    /**
+     * Проверка логина пользователя на уникальность
+     * @param string $login логин пользователя
+     * @return результат проверки
+     */
     public function isLoginUnique(?string $login = null)
     {
         $query = "SELECT * FROM users WHERE login = ?";
@@ -42,51 +57,58 @@ class UserData
         return $result;
     }
 
+    /**
+     * Добавление email пользователя в базу данных
+     * @param string $email электронный адрес пользователя
+     * @return результат добавления
+     */
     public function insertUserEmail(?string $email = null)
     {
         $query = "INSERT INTO email (`email`) VALUES (?)";
-
         $statement = $this->connection->prepare($query);
-
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        
         $statement->execute([$email]);
-        
         $result = $statement->fetchAll();
 
         return $result;
     }
 
+    /**
+     * Получение данных о пользователе
+     * @param string $login логин пользователя
+     * @param string $pass пароль пользователя
+     * @return array массив с данными о пользователе
+     */
     public function getUserData(?string $login = null, ?string $pass = null)
     {
         $query = "SELECT * FROM users WHERE login = ? AND password = ?";
-
         $statement = $this->connection->prepare($query);
-
-        $statement->setFetchMode(PDO::FETCH_ASSOC);
-        
+        $statement->setFetchMode(PDO::FETCH_ASSOC);   
         $statement->execute([$login, $pass]);
-        
         $result = $statement->fetch();
 
         return $result;
     }
 
+    /**
+     * Получение данных о пользователе через идентификатор
+     * @param string $id идентификатор пользователя
+     * @return array массив с данными о пользователе
+     */
     public function getUserDataById(?int $id)
     {
         $query = "SELECT * FROM users WHERE id = ?";
-
         $statement = $this->connection->prepare($query);
-
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        
         $statement->execute([$id]);
-        
         $result = $statement->fetch();
 
         return $result;
     }
 
+    /**
+     * Обращение к переменной
+     */
     public function lastInsertId()
     {
         return $this->lastInsertId;

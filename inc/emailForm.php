@@ -1,28 +1,14 @@
 <?php
     require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 
-    use Controllers\Sessions\UserData;
-    use Controllers\Sessions\FormCleaner;
+    use Controllers\Sessions\Email;
 
-    $userData = new UserData();
-    $fClean = new FormCleaner();
+    $email = new Email();
 
-    // error_reporting(0);
     $dataError = '';
 
     if(!empty($_POST)) {
-        $email = $_POST['email'];
-        $email = $fClean->formClean($email);
-
-        if(!empty($email)) {
-            $email_validate = filter_var($email, FILTER_VALIDATE_EMAIL); 
-            if($email_validate) {
-                $userData->insertUserEmail($email);  
-                echo "<script type='text/javascript'>alert('Вы успешно подписались!');</script>";
-            } else {
-                $dataError = 'Данные введены неверно.';
-            }
-        }
+       $dataError = $email->sendEmail();
     }
 ?>
 

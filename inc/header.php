@@ -1,7 +1,10 @@
 <?php
     $configs = include($_SERVER['DOCUMENT_ROOT'] . '/config.php');
+
     use Controllers\Sessions\UserData;
+
     $userData = new UserData();
+    
     if(isset($_SESSION['user_id'])) {
         $userID = $userData->getUserDataById($_SESSION['user_id']);
         $loginBtn = $userID['name'];
@@ -16,6 +19,8 @@
     } else {
         $itemAmount = '0';
     }
+
+    print_r($userData->isLoginUnique(kaloed));
     
 ?>
 

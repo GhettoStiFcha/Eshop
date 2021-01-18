@@ -14,21 +14,26 @@ class Sizes
         $this->connection = MysqlConnection::connect();
     }
 
+    /**
+     * Получение идентификаторов размеров товара
+     * @param int $id идентификатор товара
+     * @return array массив размеров
+     */
     public function getItemSizes(?int $id): array
     {
-        // 1. Подготавливаем запрос
         $statement = $this->connection->prepare('SELECT size_id FROM added_sizes WHERE product_id=?');
-        // 2. Указываем тип данных
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        // 3. Отправляем запрос в БД
         $statement->execute([$id]);
-        // 4. Указываем что сделать с данными после получения запроса
         $result = $statement->fetchAll();
 
         return $result;
     }
 
-
+    /**
+     * Получение наименования размеров
+     * @param int $sizeID идентификатор размера
+     * @return array массив с наименованием размеров
+     */
     public function getSizes(?int $sizeID): array
     {
         $statement = $this->connection->prepare('SELECT * FROM sizes WHERE id=?');

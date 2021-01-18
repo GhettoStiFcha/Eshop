@@ -5,11 +5,8 @@
     use Controllers\Sessions\UserData;
     $userData = new UserData();
 
-    // session_start();
-
     if(isset($_SESSION['user_id'])) {
         $user = $userData->getUserDataById($_SESSION['user_id']);
-        // print_r($user);
     } else {
         header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Login.php');
     }

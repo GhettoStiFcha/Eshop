@@ -1,54 +1,16 @@
 <?php
+    error_reporting(0);
 
     require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 
-    use Controllers\Sessions\UserData;
-    use Controllers\Sessions\FormCleaner;
+    use Controllers\Sessions\Register;
 
-    $userData = new UserData();
-    $fClean = new FormCleaner();
-    
-    print_r($userData->lastInsertId());
+    $register = new Register();
 
-    error_reporting(0);
-    $dataError = '';
-
-    session_start();
-    if (!empty($_SESSION['user_id'])) {
-        header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
-    }
+    $register->redirectUserIfLoggedIn();
 
     if(!empty($_POST)) {
-
-        $pass = md5(md5($_POST['pass']));
-        $login = $_POST['login'];
-        $name = $_POST['name'];
-        $surname = $_POST['surname'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-
-        $result = $fClean->cleaner($pass, $login, $name, $surname, $phone, $email);
-        $unique = $userData->isLoginUnique($result['login']);
-
-        if(!empty($result) && ($_POST['pass'] === $_POST['pass-confirm'])) {
-            $email_validate = filter_var($result['email'], FILTER_VALIDATE_EMAIL); 
-            if(empty($unique)){
-                if($fClean->cleanCheck($result['login'], $result['name'], $result['surname'], $result['phone']) && $email_validate) {
-                    $registration = $userData->insertUserData($result['login'], $result['pass'], $result['name'], $result['surname'], $result['phone'], $result['email']);
-                    if ($registration) { 
-                        session_start();
-                        $_SESSION['user_id'] = $userData->lastInsertId();
-                        header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
-                    } else {
-                        $dataError = 'Упс... Произошла какая-то ошибка. Попробуйте снова!';
-                    }
-                } else {
-                    $dataError = 'Данные введены неверно.';
-                }
-            } else {
-                $dataError = 'Данный логин уже занят. Попробуйте другой!';
-            }
-        }
+        $dataError = $register->addUser();
     }
 ?>
 

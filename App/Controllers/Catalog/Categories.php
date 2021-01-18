@@ -15,29 +15,30 @@ class Categories
         $this->connection = MysqlConnection::connect();
     }
 
+    /**
+     * Получение родительских категорий
+     * @return array массив категорий
+     */
     public function getRootCategories(): array
     {
-        // 1. Подготавливаем запрос
         $statement = $this->connection->prepare('SELECT * FROM categories WHERE parent_id=?');
-        // 2. Указываем тип данных
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        // 3. Отправляем запрос в БД
         $statement->execute([$this->rootID]);
-        // 4. Указываем что сделать с данными после получения запроса
         $result = $statement->fetchAll();
 
         return $result;
     }
 
+    /**
+     * Получение подкатегорий
+     * @param int $parent идентификатор родительской подкатегории
+     * @return array массив подкатегорий
+     */
     public function getChildCategories(int $parent): array
     {
-        // 1. Подготавливаем запрос
         $statement = $this->connection->prepare('SELECT * FROM categories WHERE parent_id=?');
-        // 2. Указываем тип данных
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        // 3. Отправляем запрос в БД
         $statement->execute([$parent]);
-        // 4. Указываем что сделать с данными после получения запроса
         $result = $statement->fetchAll();
 
         return $result;

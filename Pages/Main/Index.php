@@ -4,7 +4,6 @@
     use Controllers\Sessions\MainItems;
 
     $main = new MainItems();
-
 ?>
 
 <!DOCTYPE html>

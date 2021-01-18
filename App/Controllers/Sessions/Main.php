@@ -8,8 +8,8 @@ use Controllers\Sessions\MainItems;
 
 $item = new MainItems();
 
-if ( empty($_GET) ) {
+if (empty($_GET)) {
     echo json_encode($item->getAllItems());
 } else {
-    print_r('123');
+    print_r('Произошла какая-то ошибка. Попробуйте снова!');
 }

@@ -11,6 +11,12 @@ class UserCart implements CartInterface
         session_start();
     }
 
+    /**
+     * Добавление одной единицы товара в корзину
+     * @param int $id идентификатор товара
+     * @param int $size идентификатор размера товара
+     * @return Значение количества товара в корзине
+     */
     public function addItem(int $id, ?int $size): int
     {
         $issetID = false;
@@ -33,12 +39,16 @@ class UserCart implements CartInterface
             ];
         }
 
-        // print_r($_SESSION['item']);
-        // session_destroy();
         return $_SESSION['item'][$itemNumber]['amount'];
         
     }
 
+    /**
+     * Удаление одной единицы товара из корзины
+     * @param int $id идентификатор товара
+     * @param int $size идентификатор размера товара
+     * @return Значение количества товара в корзине
+     */
     public function removeItem(int $id, ?int $size): int
     {
         $issetID = false;
@@ -52,18 +62,20 @@ class UserCart implements CartInterface
             }
         }
         if ($_SESSION['item'][$itemNumber]['amount'] === 1) {
-            // $_SESSION['item'][$itemNumber] = '';
             unset($_SESSION['item'][$itemNumber]);
         } else if ($issetID) {
             $_SESSION['item'][$itemNumber]['amount']--;
         }
 
-        // print_r($_SESSION['item']);
-        // session_destroy();
-        // return count($_SESSION['item']);
         return $_SESSION['item'][$itemNumber]['amount'];
     }
 
+    /**
+     * Удаление товара из корзины
+     * @param int $id идентификатор товара
+     * @param int $size идентификатор размера товара
+     * @return Результат удаления
+     */
     public function deleteItem(int $id, ?int $size)
     {
         $issetID = false;
@@ -83,11 +95,10 @@ class UserCart implements CartInterface
         return false;
     }
 
-    public function getItem(int $id): array
-    {
-
-    }
-
+    /**
+     * Получение всех данных о товаре в корзине
+     * @return Массив с данными о товаре
+     */
     public function getAllItems(): array
     {
         $result = [];
@@ -98,6 +109,10 @@ class UserCart implements CartInterface
         return $_SESSION['item'];
     }
 
+    /**
+     * Получение всех товаров в корзине
+     * @return Массив с идентификаторами товаров
+     */
     public function getItemsIDs(): array
     {
         $item = $this->getAllItems();

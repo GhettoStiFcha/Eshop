@@ -21,21 +21,6 @@ function generateCard(data) {
     return item;
 }
 
-function getFormData(formName) {
-    let form = document.forms[formName];
-    let stringParameters = '';
-    let convertedValues = ['подписаться'];
-    // console.log(form);
-    for (let i = 0; i < form.length; i++) {
-        let convertedValue = form[i].value;
-        if (convertedValues.includes(form[i].value)) convertedValue = '';
-        stringParameters += `&${form[i].name}=${convertedValue}`;
-    }
-    stringParameters = stringParameters.slice(1);
-    // console.log(stringParameters);
-    return stringParameters
-}
-
 window.addEventListener('load', () => {
     let XHR = getData('/App/Controllers/Sessions/Main.php');
     XHR.addEventListener('load', function () {

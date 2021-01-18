@@ -4,29 +4,16 @@
 
     require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 
-    use Controllers\Sessions\UserData;
+    use Controllers\Sessions\Login;
+    use Controllers\Sessions\Register;
 
-    $loginError = '';
+    $login = new Login();
+    $register = new Register();
 
-    session_start();
-    if (!empty($_SESSION['user_id'])) {
-        header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
-    }
+    $register->redirectUserIfLoggedIn();
 
     if(!empty($_POST)) {
-        $pass = md5(md5($_POST['pass']));
-        $login = $_POST['login'];
-
-        $userData = new UserData();
-        $user = $userData->getUserData($login, $pass);
-        
-        if (!empty($user)) {
-            $_SESSION['user_id'] = $user['id'];
-            session_start();
-            header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
-        } else {
-            $loginError =  'Неверные имя пользователя или пароль.';
-        }
+        $loginError = $login->LogInUser();
     }
 
 ?>

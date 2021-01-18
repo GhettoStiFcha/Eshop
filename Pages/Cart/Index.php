@@ -17,8 +17,6 @@ $cartItems = $item->getItemsIDs();
 
 $catalog = new CatalogItems();
 
-
-
 $uniqueArray = array_unique($cartItems);
 
 if (count($cartItems) != count($uniqueArray)) {
@@ -29,12 +27,9 @@ if (count($cartItems) != count($uniqueArray)) {
     $jo = $catalog->getItemsByMultipleIDs($cartItems);
 }
 
-// print_r($cart);
 foreach($jo as $key => $value) { 
     $id = $value['id'];
-    // print_r($value);
     foreach($cart as $index => $cartAmount) {
-        // print_r($cartAmount);
         $filteredSize = $size->getSizes($cartAmount['size_id']);
         if ((int)$id === (int)$cartAmount['id']) {
             $jo[$key]['amount'] = $cartAmount['amount'];
