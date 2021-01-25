@@ -19,8 +19,6 @@
     } else {
         $itemAmount = '0';
     }
-
-    print_r($userData->isLoginUnique(kaloed));
     
 ?>
 

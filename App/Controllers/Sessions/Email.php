@@ -29,13 +29,18 @@ class Email
     public function sendEmail()
     {
         $dataError = '';
+        $subject = 'Hello World';
+        $message = 'message';
 
         if(!empty($this->email)) {
             if($this->email_validate) {
-                $this->userData->insertUserEmail($this->email);  
-                echo "<script type='text/javascript'>alert('Вы успешно подписались!');</script>";
-            } else {
-                $dataError = 'Данные введены неверно.';
+                $this->userData->insertUserEmail($this->email);
+                $mailResult = mail($this->email, $subject, $message);
+                if($mailResult){
+                    echo "<script type='text/javascript'>alert('Вы успешно подписались!');</script>";
+                } else {
+                    $dataError = 'Данные введены неверно.';
+                }
             }
         }
 
