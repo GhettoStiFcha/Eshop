@@ -39,8 +39,10 @@ class Email
                 if($mailResult){
                     echo "<script type='text/javascript'>alert('Вы успешно подписались!');</script>";
                 } else {
-                    $dataError = 'Данные введены неверно.';
+                    $dataError = 'Упс... Что-то пошло не так. Попробуйте снова!';
                 }
+            } else {
+                $dataError = 'Данные введены неверно.';
             }
         }
 
