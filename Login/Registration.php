@@ -10,7 +10,7 @@
     $register->redirectUserIfLoggedIn();
 
     if(!empty($_POST)) {
-        $dataError = $register->addUser();
+        $dataError = $register->addUser(1);
     }
 ?>
 

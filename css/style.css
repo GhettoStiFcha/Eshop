@@ -567,6 +567,11 @@ body {
     justify-content: center;
     align-items: center;
 }
+.cart-empty{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 5px 0;
+}
 .cart-item{
     position: relative;
     display: flex;
@@ -646,6 +651,39 @@ body {
     width: 1px;
     transform: rotate(-45deg);
 }
+.cart-item-total-price{
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.cart-buy-buttons-box{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.cart-buy-button{
+    cursor: pointer;
+    border: 2px solid #000000;
+    background-color: #000000be;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    outline: none;
+    font-style: normal;
+    font-size: 16px;
+    width: 15%;
+    box-sizing: border-box;
+}
+.cart-error-sign{
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    margin-top: 10px;
+}
 .login-h1{
     text-align: center;
     font-weight: 300;
@@ -657,7 +695,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px 0;
+    margin-bottom: 20px;
 }
 .login-form-item-box{
     display: flex;
@@ -697,6 +735,7 @@ body {
     font-size: 16px;
     width: 100%;
     box-sizing: border-box;
+    margin-top: 10px;
 }
 .fullscreen{
     display: flex;
@@ -716,6 +755,11 @@ body {
     font-weight: 300;
     font-size: 30px;
 }
+.account-text-box{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
 .login-destroy-btn{
     text-decoration: none;
     color: #ffffff;
@@ -723,8 +767,91 @@ body {
     background-color: #125be4;
     box-sizing: border-box;
     padding: 10px;
+    margin-bottom: 5px;
     cursor: pointer;
-    margin: 20px 0;
+    
+}
+.popup{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background-color: #00000070;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 999999;
+}
+.popup-inner{
+    position: relative;
+    text-align: center;
+    justify-content: start;
+    min-height: 100px;
+    background-color: #f8f8f8;
+    border: 2px solid #e67429;
+    padding: 60px;
+}
+.popup-inner::before{
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: url(/images/5642a5cbb7ec5873ba9b1ced444f2fc6.png) center center / contain no-repeat;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    top: -60px;
+}
+.popup-inner-close{
+    width: 31px;
+    height: 31px;
+    background-color: #f68236;
+    border: 2px solid #e67429;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    cursor: pointer;
+}
+.popup-inner-close::before{
+    content: '';
+    position: absolute;
+    background-color: #f8f8ff;
+    width: 25px;
+    height: 3px;
+    left: 0;
+    right: 0;
+    top: 14px;
+    margin: 0 auto;
+    transform: rotate(-45deg);
+    transition: 1s;
+}
+.popup-inner-close:hover::before{
+    transform: rotate(135deg);
+}
+.popup-inner-close::after{
+    content: '';
+    position: absolute;
+    background-color: #f8f8ff;
+    width: 25px;
+    height: 3px;
+    left: 0;
+    right: 0;
+    top: 14px;
+    margin: 0 auto;
+    transform: rotate(45deg);
+    transition: 1s;
+}
+.popup-inner-close:hover::after{
+    transform: rotate(225deg);
+}
+.popup-inner-text{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 15px;
+    height: 50px;
+    margin: 0 auto;
+    text-transform: uppercase;
 }
 @media (max-width: 750px){
     .header-nav{

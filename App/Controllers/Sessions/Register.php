@@ -46,9 +46,10 @@ class Register
 
     /**
      * Проверка данных и вызов метода для регитсрации пользователя
+     * @param int $redirect вкл./выкл. перенаправление пользователя
      * @return string Обозначение ошибки, которая могла возкинуть при ходе действий
      */
-    public function addUser()
+    public function addUser($redirect)
     {
         $dataError = '';
     
@@ -63,7 +64,9 @@ class Register
                     if ($registration) { 
                         session_start();
                         $_SESSION['user_id'] = $this->userData->lastInsertId();
-                        header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
+                        if($redirect){
+                            header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Account.php');
+                        }
                     } else {
                         $dataError = 'Упс... Произошла какая-то ошибка. Попробуйте снова!';
                     }

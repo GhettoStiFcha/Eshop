@@ -67,7 +67,6 @@ function addAmount(id, size) {
         let data = JSON.parse(XHR.responseText);
         insertDataIntoElement(data, `#item-${id}`);
     });
-    // let amount = addItemToCart(id);
 }
 
 function removeAmount(id, size) {
@@ -77,4 +76,15 @@ function removeAmount(id, size) {
         insertDataIntoElement(data, `#item-${id}`);
     });
 }
+
+function openOrderPopup(popupName) {
+    document.getElementById(`${popupName}OrderPopup`).style.display = 'flex';
+}
+
+function closeOrderPopup(popupName) {
+    document.getElementById(`${popupName}OrderPopup`).style.display = 'none';
+}
+
+
+
 

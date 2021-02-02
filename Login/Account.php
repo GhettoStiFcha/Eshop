@@ -31,15 +31,20 @@
         <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\header.php'); ?>
         <div class="fullscreen">
             <div class="account-box">
-                <h1 class="account-h1">Личный кабинет</h1>
-                <div class="account-hello">
-                    Доброго времени суток, <?=$user['name']?>!
+                <div class="account-text-box">
+                    <h1 class="account-h1">Личный кабинет</h1>
+                    <div class="account-hello">
+                        Доброго времени суток, <?=$user['name']?>!
+                    </div>
+                    <div class="account-phone">
+                        Ваш телефон: <?=$user['phone_number']?>
+                    </div>
+                    <div class="account-email">
+                        Ваш email: <?=$user['email']?>
+                    </div>
                 </div>
-                <div class="account-phone">
-                    Ваш телефон: <?=$user['phone_number']?>
-                </div>
-                <div class="account-email">
-                    Ваш email: <?=$user['email']?>
+                <div class="login-destroy-btn" onclick="emailDestroy(<?=$user['email']?>)">
+                    Отказаться от рассылки
                 </div>
                 <a href="/Login/Login.php" class="login-destroy-btn" onclick="sessionDestroy()">
                     Выйти
