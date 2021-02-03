@@ -129,31 +129,6 @@
             <p class="cart-error-sign"><?=$orderError?></p>
         </div>
 
-            <div class="popup" id="fastOrderPopup">
-                <div class="popup-inner">
-                    <div class="popup-inner-close" onclick="closeOrderPopup('fast')"></div>
-                    <div class="popup-inner-text">Оформление заказа</div>
-                    <form class="login-form" method="POST">
-                        <div class="login-form-item-box">
-                            <label for="name">Ваше имя:</label>
-                            <div class="form-item">
-                                <input required pattern="[A-Za-zА-Яа-яЁё]{,30}" title="Не более чем 30 символов" class="login-form-input" type="text" name="fast_name" placeholder="Иван">
-                            </div>
-                        </div>
-                        <div class="login-form-item-box">
-                            <label for="phone">Ваш номер телефона:</label>
-                            <div class="form-item">
-                                <input required pattern="[0-9]{11, 14}" title="Номер телефона не должен содержать буквы или символы" class="login-form-input" type="tel" name="fast_phone" placeholder="79993210011">
-                            </div>
-                        </div>
-                        <div class="form-item">
-                            <input class ="login-form-submit" type="submit" value="Купить в один клик">
-                        </div>
-                        <?=$dataError;?>
-                    </form>
-                </div>
-            </div>
-            
             <div class="popup" id="fullOrderPopup">
                 <div class="popup-inner">
                     <div class="popup-inner-close" onclick="closeOrderPopup('full')"></div>
@@ -200,6 +175,31 @@
                         </div>
                         <div class="form-item">
                             <input class ="login-form-submit" type="submit" value="Оформить заказ и зарегистрироваться">
+                        </div>
+                        <?=$dataError;?>
+                    </form>
+                </div>
+            </div>
+
+            <div class="popup" id="fastOrderPopup">
+                <div class="popup-inner">
+                    <div class="popup-inner-close" onclick="closeOrderPopup('fast')"></div>
+                    <div class="popup-inner-text">Оформление заказа</div>
+                    <form class="login-form" method="POST">
+                        <div class="login-form-item-box">
+                            <label for="name">Ваше имя:</label>
+                            <div class="form-item">
+                                <input required pattern="[A-Za-zА-Яа-яЁё]{,30}" title="Не более чем 30 символов" class="login-form-input" type="text" name="fast_name" placeholder="Иван">
+                            </div>
+                        </div>
+                        <div class="login-form-item-box">
+                            <label for="phone">Ваш номер телефона:</label>
+                            <div class="form-item">
+                                <input required pattern="[0-9]{11, 14}" title="Номер телефона не должен содержать буквы или символы" class="login-form-input" type="tel" name="fast_phone" placeholder="79993210011">
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <input class ="login-form-submit" type="submit" value="Купить в один клик">
                         </div>
                         <?=$dataError;?>
                     </form>

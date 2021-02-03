@@ -11,3 +11,20 @@ function sessionDestroy() {
         let data = JSON.parse(XHR.responseText);
     });
 };
+
+function openDestroyPopup(popupName) {
+    document.getElementById(`${popupName}DestroyPopup`).style.display = 'flex';
+}
+
+function closeDestroyPopup(popupName) {
+    document.getElementById(`${popupName}DestroyPopup`).style.display = 'none';
+}
+
+function emailDestroy(email, popupName) {
+    let XHR = getData(`/App/Controllers/Sessions/Account.php?email=${email}`);
+    XHR.addEventListener('load', function () {
+        let data = JSON.parse(XHR.responseText);
+    });
+    alert('Вы успешно отписались!');
+    document.getElementById(`${popupName}DestroyPopup`).style.display = 'none';
+}

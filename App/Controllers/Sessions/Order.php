@@ -86,6 +86,11 @@ class Order
         return $this->lastInsertId;
     }
 
+    /**
+     * Проверка данных и вызов соотоветствующих методов для занесения заказа в базу данных
+     * @param array $jo массив с товарами из корзины
+     * @return string Обозначение ошибки или сообщения для пользователя
+     */
     public function addOrder(array $jo)
     {
         $orderError = '';
@@ -98,7 +103,9 @@ class Order
                 $orderError = 'Упс... Произошла какая-то ошибка. Попробуйте снова!';
             }
         } else if(!empty($this->fast_name) && !empty($this->fast_phone)) {
-            $orderDataError = $this->addRandomUserOrder($this->fast_name, $this->fast_phone);
+            $name = $this->fClean->formClean($this->fast_name);
+            $phone = $this->fClean->formClean($this->fast_phone);
+            $orderDataError = $this->addRandomUserOrder($name, $phone);
         }
         if($orderDataError){
             $orderID = $this->lastInsertId();

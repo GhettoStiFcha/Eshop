@@ -109,6 +109,20 @@ class UserData
     {
         return $this->lastInsertId;
     }
+
+    /**
+     * Отключение рассылки для пользователя
+     */
+    public function emailDestroy($email)
+    {
+        $query = "UPDATE email SET activity = '0' WHERE email = ?";
+        $statement = $this->connection->prepare($query);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute([$email]);
+        $result = $statement->fetch();
+
+        return $result;
+    }
 }
 
 

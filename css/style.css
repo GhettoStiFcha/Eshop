@@ -767,9 +767,19 @@ body {
     background-color: #125be4;
     box-sizing: border-box;
     padding: 10px;
-    margin-bottom: 5px;
+    margin: 5px;
     cursor: pointer;
-    
+}
+.destroy-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+.destroy-form .login-destroy-btn{
+    width: 20%;
 }
 .popup{
     display: none;

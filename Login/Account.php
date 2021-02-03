@@ -11,6 +11,9 @@
         header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Login.php');
     }
 
+    if(!empty($_GET)){
+        // if (){}
+    }
 
 ?>
 
@@ -43,7 +46,7 @@
                         Ваш email: <?=$user['email']?>
                     </div>
                 </div>
-                <div class="login-destroy-btn" onclick="emailDestroy(<?=$user['email']?>)">
+                <div class="login-destroy-btn" onclick="openDestroyPopup('email')">
                     Отказаться от рассылки
                 </div>
                 <a href="/Login/Login.php" class="login-destroy-btn" onclick="sessionDestroy()">
@@ -51,10 +54,23 @@
                 </a>
             </div>
         </div>
+        <p class="cart-error-sign"><?=$destroyError?></p>
         <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\footer.php'); ?>
     </div>
     
-
+    <div class="popup" id="emailDestroyPopup">
+        <div class="popup-inner">
+            <div class="popup-inner-text">Отказаться от рассылки?</div>
+            <div class="destroy-form">
+                <div class="login-destroy-btn" onclick="emailDestroy(`<?=$user['email']?>`, 'email')">
+                    Да
+                </div>
+                <div class="login-destroy-btn" onclick="closeDestroyPopup('email')">
+                    Нет
+                </div>
+            </div>  
+        </div>
+    </div>
     
     <script src="/js/account.js"></script>
 </body>
