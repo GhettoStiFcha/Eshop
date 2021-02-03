@@ -25,6 +25,6 @@ function emailDestroy(email, popupName) {
     XHR.addEventListener('load', function () {
         let data = JSON.parse(XHR.responseText);
     });
-    alert('Вы успешно отписались!');
     document.getElementById(`${popupName}DestroyPopup`).style.display = 'none';
-}
+    window.location.reload();
+} 

@@ -63,8 +63,7 @@ class UserData
         $query = "INSERT INTO email (`email`) VALUES (?)";
         $statement = $this->connection->prepare($query);
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        $statement->execute([$email]);
-        $result = $statement->fetchAll();
+        $result = $statement->execute([$email]);
 
         return $result;
     }
@@ -112,10 +111,42 @@ class UserData
 
     /**
      * Отключение рассылки для пользователя
+     * @param string $email эл.почта пользователя
+     * @return результат отключения
      */
-    public function emailDestroy($email)
+    public function emailDestroy(string $email)
     {
         $query = "UPDATE email SET activity = '0' WHERE email = ?";
+        $statement = $this->connection->prepare($query);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $statement->execute([$email]);
+
+        return $result;
+    }
+
+    /**
+     * Включение рассылки для пользователя
+     * @param string $email эл.почта пользователя
+     * @return результат отключения
+     */
+    public function emailInclusion(string $email)
+    {
+        $query = "UPDATE email SET activity = '1' WHERE email = ?";
+        $statement = $this->connection->prepare($query);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $statement->execute([$email]);
+
+        return $result;
+    }
+
+    /**
+     * Определение активности рассылки для пользователя
+     * @param string $email эл.почта пользователя
+     * @return результат проверки
+     */
+    public function activityCheck(string $email)
+    {
+        $query = "SELECT activity FROM email WHERE email = ?";
         $statement = $this->connection->prepare($query);
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         $statement->execute([$email]);

@@ -10,6 +10,7 @@
     if(!empty($_POST)) {
        $dataError = $email->sendEmail();
     }
+
 ?>
 
 <div class="subscribe-form-box">
@@ -20,7 +21,7 @@
             <input required pattern="[^ @]+@[^ @]+.[a-z]+" name="email" class="email-form-input" type="email" placeholder="ivan@email.com">
         </div>
         <div class="email-form-item">
-            <input name="submit" class="email-form-submit" type="submit" value="подписаться">
+            <input name="submit" class="email-form-submit" type="submit" value="подписаться" onClick="window.location.reload()">
         </div>
     </form>
     <?=$dataError?>

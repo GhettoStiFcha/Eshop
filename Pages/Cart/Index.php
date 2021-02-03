@@ -11,17 +11,15 @@
     use Controllers\Sessions\Register;
     use Controllers\Sessions\Order;
 
-
     $item = new UserCart();
     $size = new Sizes();
     $register = new Register();
     $order = new Order();
     $br = new Breadcrumbs();
+    $catalog = new CatalogItems();
 
     $cart = $item->getAllItems();
     $cartItems = $item->getItemsIDs();
-
-    $catalog = new CatalogItems();
 
     $uniqueArray = array_unique($cartItems);
 

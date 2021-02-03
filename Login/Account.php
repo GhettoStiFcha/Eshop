@@ -11,9 +11,7 @@
         header('location: ' . $_SERVER['REQUEST_SHEME'] . '/Login/Login.php');
     }
 
-    if(!empty($_GET)){
-        // if (){}
-    }
+    $result = $userData->activityCheck($user['email']);
 
 ?>
 
@@ -46,12 +44,20 @@
                         Ваш email: <?=$user['email']?>
                     </div>
                 </div>
-                <div class="login-destroy-btn" onclick="openDestroyPopup('email')">
-                    Отказаться от рассылки
-                </div>
-                <a href="/Login/Login.php" class="login-destroy-btn" onclick="sessionDestroy()">
-                    Выйти
-                </a>
+                <?php if($result['activity'] == 1): ?>
+                    <div class="login-destroy-btn" onclick="openDestroyPopup('email')">
+                        Отказаться от рассылки
+                    </div>
+                    <a href="/Login/Login.php" class="login-destroy-btn" onclick="sessionDestroy()">
+                        Выйти
+                    </a>
+                <?php else: ?>
+                    <a href="/Login/Login.php" class="login-destroy-btn" onclick="sessionDestroy()">
+                        Выйти
+                    </a>
+                    <?php include($_SERVER['DOCUMENT_ROOT'] . '\inc\emailForm.php'); ?>
+                <?php endif; ?>
+                
             </div>
         </div>
         <p class="cart-error-sign"><?=$destroyError?></p>
