@@ -16,12 +16,14 @@ class Order
     private $fast_phone;
     private $register;
     private $fClean;
+    private $userID;
 
     public function __construct()
     {
         $this->connection = MysqlConnection::connect();
         $this->fast_name = $_POST['fast_name'] ?? null;
         $this->fast_phone = $_POST['fast_phone'] ?? null;
+        $this->userID = $_POST['user_id'] ?? null;
         $this->fClean = new FormCleaner();
         $this->register = new Register();
     }
@@ -68,12 +70,60 @@ class Order
      * @param int $orderID идентификатор заказа
      * @return результат добавления
      */
-    public function addOrderItems(?int $id = null, ?string $item_name = null, ?int $amount = null, ?int $sizeID = null, ?int $orderID = null)
+    public function addOrderItems(?int $id = null, ?string $item_name = null, ?int $amount = null, ?string $sizeName = null, ?int $orderID = null)
     {
-        $query = "INSERT INTO order_items (`item_id`, `item_name`, `amount`, `item_size_id`, `order_id`) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO order_items (`item_id`, `item_name`, `amount`, `item_size`, `order_id`) VALUES (?, ?, ?, ?, ?)";
         $statement = $this->connection->prepare($query);
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        $result = $statement->execute([$id, $item_name, $amount, $sizeID, $orderID]);
+        $result = $statement->execute([$id, $item_name, $amount, $sizeName, $orderID]);
+
+        return $result;
+    }
+
+    /**
+     * Поиск заказов, сделанных конкретным пользователем
+     * @param int $userID идентификатор пользователя
+     * @return array массив с заказами пользователя
+     */
+    public function checkUserOrders(int $userID)
+    {
+        $query = "SELECT id FROM orders WHERE user_id = ?";
+        $statement = $this->connection->prepare($query);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute([$userID]);
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+
+    /**
+     * Поиск товаров, находящихся в заказе
+     * @param int $orderID идентификатор заказа
+     * @return array массив с заказами пользователя
+     */
+    public function checkOrderItems(int $orderID)
+    {
+        $query = "SELECT * FROM order_items WHERE order_id = ?";
+        $statement = $this->connection->prepare($query);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute([$orderID]);
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+
+    /**
+     * Проверка статуса заказа
+     * @param идентификатор заказа
+     * @return идентификатор статуса заказа
+     */
+    public function checkOrderStatus(int $orderID)
+    {
+        $query = "SELECT activity FROM orders WHERE id = ?";
+        $statement = $this->connection->prepare($query);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute([$orderID]);
+        $result = $statement->fetch();
 
         return $result;
     }
@@ -95,7 +145,7 @@ class Order
     {
         $orderError = '';
 
-        if(empty($this->fast_phone)) {
+        if(empty($this->fast_phone) && empty($this->userID)) {
             $dataError = $register->addUser(0);
             if(empty($dataError)){
                 $orderDataError = $this->addRegistredUserOrder($_SESSION['user_id']);
@@ -106,11 +156,13 @@ class Order
             $name = $this->fClean->formClean($this->fast_name);
             $phone = $this->fClean->formClean($this->fast_phone);
             $orderDataError = $this->addRandomUserOrder($name, $phone);
+        } else if(!empty($this->userID)) {
+            $orderDataError = $this->addRegistredUserOrder($_SESSION['user_id']);
         }
         if($orderDataError){
             $orderID = $this->lastInsertId();
             foreach($jo as $key => $value){
-                $this->addOrderItems($value['id'], $value['name'], $value['amount'], $value['size_id'], $orderID);
+                $this->addOrderItems($value['id'], $value['name'], $value['amount'], $value['size'], $orderID);
             }
             $orderError = 'Ваш заказ принят в обработку! В скором времени с Вами свяжется наш менеджер.';
         } else {
@@ -118,5 +170,22 @@ class Order
         }
 
         return $orderError;
+    }
+
+    /**
+     * Получение истории заказов пользователя
+     * @return array Массив товаров, заказанных пользователем
+     */
+    public function getOrderHistory()
+    {
+        $userOrders = $this->checkUserOrders($_SESSION['user_id']);
+
+        $orderItems = [];
+        foreach($userOrders as $key => $value){
+            $orderItems[] = $this->checkOrderItems($value['id']);
+        }   
+    
+        return $orderItems;
+
     }
 }

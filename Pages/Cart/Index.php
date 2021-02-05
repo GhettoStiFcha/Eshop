@@ -58,6 +58,8 @@
     $br->AddStep('/Pages/Main', 'Главная');
     $br->AddStep(null, 'Корзина');
 
+    print_r($jo);
+
 ?>
 
 <!DOCTYPE html>
@@ -119,7 +121,7 @@
                         <div class="cart-buy-button" onclick="openOrderPopup('full')">Оформить заказ</div>
                         <div class="cart-buy-button" onclick="openOrderPopup('fast')">Купить в один клик</div>
                     <?php else: ?>
-                        <div class="cart-buy-button" onclick="openOrderPopup('approve')">Купить</div>
+                        <div class="cart-buy-button" onclick="openOrderPopup('user')">Купить</div>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
@@ -201,6 +203,17 @@
                         </div>
                         <?=$dataError;?>
                     </form>
+                </div>
+            </div>
+
+            <div class="popup" id="userOrderPopup">
+                <div class="popup-inner">
+                    <div class="popup-inner-close" onclick="closeOrderPopup('user')"></div>
+                    <div class="popup-inner-text">Оформить заказ?</div>
+                    <form class="destroy-form" method="POST">
+                        <input type="hidden" name="user_id" value="<?=$_SESSION['user_id']?>">
+                        <input class="login-destroy-btn" type="submit" value="Заказать">
+                    </form>  
                 </div>
             </div>
 

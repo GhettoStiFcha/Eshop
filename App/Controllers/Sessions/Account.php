@@ -7,10 +7,12 @@ require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 use Controllers\Sessions\UserAccount;
 use Controllers\Sessions\UserData;
 use Controllers\Sessions\FormCleaner;
+use Controllers\Sessions\Order;
 
 $user = new UserAccount();
 $userData = new UserData();
 $fClean = new FormCleaner();
+$order = new Order();
 
 if ($_GET['status'] === 'destroy') {
     echo json_encode($user->sessionDestroy());

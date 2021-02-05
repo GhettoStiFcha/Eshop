@@ -44,6 +44,9 @@
                         Ваш email: <?=$user['email']?>
                     </div>
                 </div>
+                <a href="/Login/OrderHistory.php" class="login-destroy-btn">
+                        История заказов
+                </a>
                 <?php if($result['activity'] == 1): ?>
                     <div class="login-destroy-btn" onclick="openDestroyPopup('email')">
                         Отказаться от рассылки

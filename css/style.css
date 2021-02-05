@@ -685,6 +685,12 @@ body {
     font-size: 18px;
     margin-top: 10px;
 }
+#userOrderPopup .login-destroy-btn{
+    border: 2px solid #e67429;
+    background-color: #f68236;
+    font-size: 17px;
+    width: 40%;
+}
 .login-h1{
     text-align: center;
     font-weight: 300;
@@ -864,6 +870,52 @@ body {
     margin: 0 auto;
     text-transform: uppercase;
 }
+.order-history-h1{
+    text-align: center;
+    font-size: 24px;
+    font-weight: 300;
+}
+.order-box{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 15px 5px;
+    border: 1px solid #60606040;
+    border-bottom: none;
+}
+.order-id{
+    padding: 10px 0;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid #60606040;
+}
+.order-box .cart-item-total-price{
+    border-bottom: 1px solid #60606040;
+    box-sizing: border-box;
+    padding: 10px 0;
+    margin: 0;
+}
+/* .order-item-status::before{
+    content: '';
+    position: absolute;
+    top: 42.5%;
+    bottom: 42.5%;
+    background-color: black;
+    width: 1px;
+    transform: rotate(45deg);
+}
+.order-item-status::after{
+    content: '';
+    position: absolute;
+    top: 42.5%;
+    bottom: 42.5%;
+    background-color: black;
+    width: 1px;
+    transform: rotate(-45deg);
+} */
 @media (max-width: 750px){
     .header-nav{
         display: none;

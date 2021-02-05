@@ -86,5 +86,3 @@ function closeOrderPopup(popupName) {
 }
 
 
-
-
