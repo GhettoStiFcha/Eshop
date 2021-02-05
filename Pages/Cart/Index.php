@@ -1,6 +1,6 @@
 <?php
 
-    error_reporting(0);
+    // error_reporting(0);
 
     require($_SERVER['DOCUMENT_ROOT'] ."/vendor/autoload.php");
 
@@ -57,8 +57,6 @@
 
     $br->AddStep('/Pages/Main', 'Главная');
     $br->AddStep(null, 'Корзина');
-
-    print_r($jo);
 
 ?>
 

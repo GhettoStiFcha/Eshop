@@ -70,12 +70,12 @@ class Order
      * @param int $orderID идентификатор заказа
      * @return результат добавления
      */
-    public function addOrderItems(?int $id = null, ?string $item_name = null, ?int $amount = null, ?string $sizeName = null, ?int $orderID = null)
+    public function addOrderItems(?int $id = null, ?string $item_name = null, ?string $size_name = null, ?int $amount = null, ?int $item_price = null, ?int $orderID = null, ?string $image_url = null)
     {
-        $query = "INSERT INTO order_items (`item_id`, `item_name`, `amount`, `item_size`, `order_id`) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO order_items (`item_id`, `item_name`, `item_size`, `amount`, `item_price`, `order_id`, `item_image_url`) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $statement = $this->connection->prepare($query);
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        $result = $statement->execute([$id, $item_name, $amount, $sizeName, $orderID]);
+        $result = $statement->execute([$id, $item_name, $size_name, $amount, $item_price, $orderID, $image_url]);
 
         return $result;
     }
@@ -114,8 +114,8 @@ class Order
 
     /**
      * Проверка статуса заказа
-     * @param идентификатор заказа
-     * @return идентификатор статуса заказа
+     * @param $orderID идентификатор заказа
+     * @return array идентификатор статуса заказа
      */
     public function checkOrderStatus(int $orderID)
     {
@@ -162,7 +162,7 @@ class Order
         if($orderDataError){
             $orderID = $this->lastInsertId();
             foreach($jo as $key => $value){
-                $this->addOrderItems($value['id'], $value['name'], $value['amount'], $value['size'], $orderID);
+                $this->addOrderItems($value['id'], $value['name'], $value['size'], $value['amount'], $value['price'], $orderID, $value['image_url']);
             }
             $orderError = 'Ваш заказ принят в обработку! В скором времени с Вами свяжется наш менеджер.';
         } else {
