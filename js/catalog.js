@@ -13,10 +13,9 @@ function getData(file) {
 function generateCard(data) {
     let item = `
         <div class="catalog-item">
-            <div class="catalog-item-pic" style="background-image: url(${data.image_url})"></div>
+            <a href="/pages/catalog/item/?id=${data.id}" class="catalog-item-pic" style="background-image: url(${data.image_url})"></a>
             <div class="catalog-item-name">${data.name}</div>
             <div class="catalog-item-price">${data.price} руб.</div>
-            <a href="/pages/catalog/item/?id=${data.id}" class="more-btn">ПОДРОБНЕЕ</a>
         </div>
         `;
 
@@ -95,6 +94,8 @@ catalog.price.addEventListener('change', () => {
 });
 
 catalog.category.addEventListener('change', () => {
+    catalog.subcategory.value = 'Выберите подкатегорию';
+    catalog.price.value = 'Выберите стоимость';
     let allParameters = getFormData('catalog');
     let XHR = getData(`/App/Controllers/Catalog/Catalog.php?${allParameters}`);
     XHR.addEventListener('load', function () {
