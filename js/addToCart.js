@@ -5,6 +5,7 @@ function insertDataIntoElement(text, element) {
 
 function deleteElementFromDOM(element) {
     element.remove();
+    window.location.reload();
 }
 
 function getData(file) {
@@ -34,6 +35,8 @@ function addItemToCart(id) {
         XHR.addEventListener('load', function () {
             let data = JSON.parse(XHR.responseText);
         });
+        alert('Товар успешно добавлен в корзину!');
+        window.location.reload();
     } else {
         alert('Выберите размер!');
     }
@@ -46,6 +49,8 @@ function removeItemFromCart(id) {
         XHR.addEventListener('load', function () {
             let data = JSON.parse(XHR.responseText);
         });
+        alert('Товар успешно удалён из корзины!');
+        window.location.reload();
     } else {
         alert('Выберите размер!');
     }
