@@ -14,7 +14,7 @@ function generateCard(data) {
     let item = `
         <div class="catalog-item">
             <a href="/pages/catalog/item/?id=${data.id}" class="catalog-item-pic" style="background-image: url(${data.image_url})"></a>
-            <div class="catalog-item-name">${data.name}</div>
+            <a href="/pages/catalog/item/?id=${data.id}" class="catalog-item-name">${data.name}</a>
             <div class="catalog-item-price">${data.price} руб.</div>
         </div>
         `;
